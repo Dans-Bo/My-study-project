@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -204,13 +205,18 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1577281541
+    uuid:
+      value0: 3014404519
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -1280562777
     name: Jump-Start
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Jump-Start_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -219,7 +225,7 @@ ScriptedImporter:
         width: 35
         height: 34
       spriteId: d18684fd852994e43b84fcce560d2eec
-    - name: Jump-Start_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -228,7 +234,7 @@ ScriptedImporter:
         width: 35
         height: 40
       spriteId: d90762c2bd2c15a4abe5d172ce4f35bd
-    - name: Jump-Start_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -237,7 +243,7 @@ ScriptedImporter:
         width: 23
         height: 57
       spriteId: c1a1ce46cabbaca45aa06f68594d9777
-    - name: Jump-Start_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
@@ -253,3 +259,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
+  previousTextureSize: {x: 128, y: 128}

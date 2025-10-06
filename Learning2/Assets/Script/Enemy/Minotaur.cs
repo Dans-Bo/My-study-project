@@ -1,14 +1,10 @@
 using UnityEngine;
 
-public class Minotaur : Enemy
+
+public class Minotaur : MonoBehaviour 
+    
 {
 
-    public override void Move()
-    {
-        base.Move();
-        animator.SetFloat("speed",Mathf.Abs(rb.velocity.x));
-        
-    }
 
 
 }

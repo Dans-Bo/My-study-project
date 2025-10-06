@@ -8,6 +8,7 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  importerVersion: 2
   textureImporterSettings:
     alphaSource: 1
     mipMapMode: 0
@@ -184,13 +185,18 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1643622194
+    uuid:
+      value0: 2343486854
+      value1: 0
+      value2: 0
+      value3: 0
+    guid: -1951480442
     name: Jump-End
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Jump-End_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -199,7 +205,7 @@ ScriptedImporter:
         width: 25
         height: 48
       spriteId: 08a409aec6d5e9245bbd02b0ab7b9d16
-    - name: Jump-End_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -208,7 +214,7 @@ ScriptedImporter:
         width: 35
         height: 41
       spriteId: d6acd732ba328614d84f356ab64ff3a6
-    - name: Jump-End_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -224,3 +230,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
+  previousTextureSize: {x: 128, y: 64}

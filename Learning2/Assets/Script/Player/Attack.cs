@@ -3,17 +3,20 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
 
-    [Header("攻击力")]
+/*     [Header("攻击力")]
     public float baseDamge;
-    public float currentAttackPower;
+    public float currentAttackPower; */
+
+    [SerializeField] Data_Attack attack;
 
     void Awake()
     {
-        currentAttackPower = baseDamge;
+        attack.currentAttackPower = attack.baseDamge;
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        collision.GetComponent<Health>()?.TakeDamage(this);
+        collision.GetComponent<Health>()?.TakeDamage(this.attack);
     }
 
 
