@@ -7,14 +7,16 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {   
-    [Header("血量")]
+    /* [Header("血量")]
     [SerializeField] float maxHealth;
     [SerializeField] float currentHealth;
 
 
     [Header("无敌时间")]
     [SerializeField] float invulnerableDuration;
-    [SerializeField] bool isInvulnerable;
+    [SerializeField] bool isInvulnerable; */
+
+    [SerializeField] Data_Health health;
 
     //public UnityEvent<Transform> onTakeDamage; //受伤事件
     public event Action OnHurt;
@@ -23,7 +25,8 @@ public class Health : MonoBehaviour
 
     void Awake()
     {
-        currentHealth = maxHealth;
+       // playerHealth = GetComponent<Data_Health> ();
+        health.currentHealth = health.maxHealth;
     }
 
     // Update is called once per frame
@@ -32,23 +35,19 @@ public class Health : MonoBehaviour
 
     }
 
-    private void Die()
-    {
-        
-    }
 
-    public void TakeDamage(Attack attack)
+    public void TakeDamage(Data_Attack attack)
     {
-        if (isInvulnerable)
+        if ( health.isInvulnerable)
         {
             return;
         }
-        currentHealth -= attack.currentAttackPower;
-        currentHealth = math.max(0, currentHealth);
+        health.currentHealth -= attack.currentAttackPower;
+        //health.currentHealth = math.max(0, playerHealth.currentHealth);
         StartCoroutine(nameof(InvelnerableCoroutine));//启动无敌时间协程
         // onTakeDamage?.Invoke(attack.transform);
         OnHurt?.Invoke();
-        if (currentHealth <= 0)
+        if (health.currentHealth <= 0)
         {
             OnDie?.Invoke();
         }
@@ -56,11 +55,11 @@ public class Health : MonoBehaviour
 
     protected virtual IEnumerator InvelnerableCoroutine()
     {
-        isInvulnerable = true;
+        health.isInvulnerable = true;
         //等待无敌时间
-        yield return new WaitForSeconds(invulnerableDuration);
+        yield return new WaitForSeconds(health.invulnerableDuration);
 
-        isInvulnerable = false;
+        health.isInvulnerable = false;
     }
 
 }

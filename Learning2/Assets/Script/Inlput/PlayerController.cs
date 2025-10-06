@@ -160,13 +160,13 @@ public class PlayerController : MonoBehaviour
     public void IsOnHurt()
     {
         IsHurt = true;
-        Debug.Log("Hurt is"+IsHurt);
+       // Debug.Log("Hurt is"+IsHurt);
     }
 
     public void IsOnDie()
     {
         IsDie = true;
-        Debug.Log("Die is" +IsDie);   
+        //Debug.Log("Die is" +IsDie);   
     }
     
    /*    void OnGUI()
