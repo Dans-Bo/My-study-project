@@ -8,7 +8,7 @@ using UnityEngine;
 public class PhysicsCheck : MonoBehaviour
 {
     private Rigidbody2D rb;
-    //private Player player;
+
     [SerializeField] float angle; 
     [SerializeField] LayerMask ground;
     [SerializeField] LayerMask wall;
@@ -45,7 +45,7 @@ public class PhysicsCheck : MonoBehaviour
 
     void PlayerPhysicsCheck()
     {
-         RaycastHit2D groundCheck = Raycast(groundOffset, groundSize,angle, Vector2.down, groundDistance, ground);
+        RaycastHit2D groundCheck = Raycast(groundOffset, groundSize,angle, Vector2.down, groundDistance, ground);
 
         if (groundCheck)
         {
@@ -56,7 +56,7 @@ public class PhysicsCheck : MonoBehaviour
         float direction = transform.parent.localScale.x;
         Vector2 grabDir = new Vector2(direction, 0f);
 
-        RaycastHit2D leftWallCheck = RaycastWll(new Vector2(rayOffset * direction,rayHight), grabDir,  wallDistance, wall);
+        RaycastHit2D leftWallCheck = RaycastWall(new Vector2(rayOffset * direction,rayHight), grabDir,  wallDistance, wall);
         //RaycastHit2D rightWallCheck = RaycastWll(rightWallOffset, Vector2.right, wallDistance, wall);
         
         if (leftWallCheck )
@@ -79,7 +79,7 @@ public class PhysicsCheck : MonoBehaviour
         return hit;
     }
 
-    private RaycastHit2D RaycastWll(Vector2 offset, Vector2 rayDiraction, float length, LayerMask layer)
+    private RaycastHit2D RaycastWall(Vector2 offset, Vector2 rayDiraction, float length, LayerMask layer)
     {
         Vector2 pos = transform.position;//获得游戏角色位置
 

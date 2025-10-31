@@ -38,15 +38,17 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(Data_Attack attack)
     {
-        if ( health.isInvulnerable)
+        if (health.isInvulnerable)
         {
             return;
         }
+        
         health.currentHealth -= attack.currentAttackPower;
         //health.currentHealth = math.max(0, playerHealth.currentHealth);
         StartCoroutine(nameof(InvelnerableCoroutine));//启动无敌时间协程
         // onTakeDamage?.Invoke(attack.transform);
         OnHurt?.Invoke();
+        
         if (health.currentHealth <= 0)
         {
             OnDie?.Invoke();
