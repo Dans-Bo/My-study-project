@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 装备类型
 /// </summary>
-public enum ItemType
+public enum ItemTypessss
 {
     Consumable, Armor, Weapon, Material //消耗品，防具，武器，材料
 }
