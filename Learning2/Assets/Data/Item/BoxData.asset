@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9885c0a98284d4743bba80e58b491d68, type: 3}
+  m_Name: BoxData
+  m_EditorClassIdentifier: 
+  lootsConfigs:
+  - lootType: 0
+    itemIDList: 0000000001000000020000000300000004000000
+    minCount: 1
+    maxCount: 3
+    dropProbability: 0.2
+  - lootType: 1
+    itemIDList: 12000000
+    minCount: 0
+    maxCount: 5
+    dropProbability: 0.5
+  - lootType: 2
+    itemIDList: 11000000100000000f0000000e000000
+    minCount: 0
+    maxCount: 5
+    dropProbability: 0.2
+  - lootType: 3
+    itemIDList: 0d0000000c0000000b0000000a000000
+    minCount: 0
+    maxCount: 5
+    dropProbability: 0.2

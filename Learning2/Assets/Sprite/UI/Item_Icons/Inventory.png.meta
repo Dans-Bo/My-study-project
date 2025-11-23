@@ -103,7 +103,7 @@ TextureImporter:
         x: 7
         y: 59
         width: 98
-        height: 101
+        height: 87
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,13 +202,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inventory_5
+      name: CloseButton
       rect:
         serializedVersion: 2
-        x: 144
-        y: 32
-        width: 25
-        height: 16
+        x: 157
+        y: 37
+        width: 9
+        height: 9
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -789,6 +789,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Inventory_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 146
+        width: 98
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7f366329b904c54dbbb5ade856d6137
+      internalID: -1978972796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -804,6 +825,8 @@ TextureImporter:
       Bag_0: -344721676
       Bag_gird_0: 2130364054
       Bag_grid_1: 310990125
+      CloseButton: 560085302
+      Inventory_0: -1978972796
       Inventory_10: -1853179416
       Inventory_11: -125883666
       Inventory_12: -296900718
@@ -828,7 +851,6 @@ TextureImporter:
       Inventory_30: 1478860532
       Inventory_31: -2032098305
       Inventory_4: 837272118
-      Inventory_5: 560085302
       Inventory_8: -1321580350
       Inventory_9: -2022914316
       Ore_Icon: 1272214023
