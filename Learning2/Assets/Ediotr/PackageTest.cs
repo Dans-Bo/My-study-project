@@ -72,4 +72,15 @@ public class PackageTest
     {
         PackageDataManage.Instance.AddItem(15,20);
     }
+
+    [MenuItem("GMCmd/打开音量设置")]
+    public static void OpenAudioPanel()
+    {
+        UIManager.Instance.OpenPanel(ConstUIName.audioPanel);
+    }
+    [MenuItem("GMCmd/清除打开面板缓存")]
+    public static void ClearOpenpanel()
+    {
+        UIManager.Instance.ClearnOpenPanelDict();
+    }
 }
