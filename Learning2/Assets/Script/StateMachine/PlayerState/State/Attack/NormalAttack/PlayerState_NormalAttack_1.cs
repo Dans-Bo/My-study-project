@@ -11,6 +11,7 @@ public class PlayerState_NormalAttack_1 : PlayerState
     {
         base.Enter();
         playerController.StartAttackTimer(attackTimeStop);
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_WeaponSwingLight1);
     }
     public override void Update()
     {

@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
     public float baseDamge;
     public float currentAttackPower; */
 
-    [SerializeField] Data_Attack attack;
+    [SerializeField] Data_AttackSO attack;
 
     void Awake()
     {
@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        collision.GetComponent<Health>()?.TakeDamage(this.attack);
+        collision.GetComponent<Health>()?.TakeDamage(attack);
     }
 
 

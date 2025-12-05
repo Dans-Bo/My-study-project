@@ -9,6 +9,7 @@ public class PlayerState_NormalAttack_2 : PlayerState
     {
         base.Enter();
         playerController.StartAttackTimer(attackTimeStop);
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_WeaponSwingLight2);
     }
     public override void Update()
     {

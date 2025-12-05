@@ -12,6 +12,7 @@ public class PlayerState_AirJump : PlayerState
         base.Enter();
         playerController.CanAirJump = false;
         playerController.SetVelocityY(jumpForce);
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_PlayerJump2);
 
         //Instantiate(original: jumpVFX, position: playerController.transform.position, rotation: Quaternion.identity);
     }

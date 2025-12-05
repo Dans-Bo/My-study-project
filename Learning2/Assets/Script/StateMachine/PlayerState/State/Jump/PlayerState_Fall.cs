@@ -11,6 +11,7 @@ public class PlayerState_Fall : PlayerState
     {
         if (playerController.IsGround)
         {
+            GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_PlayerDown);
             if (!playerInput.IsMove)
             {
                 playerStateMachine.SwitchState(typeof(PlayerState_Idle));

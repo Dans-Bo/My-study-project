@@ -94,9 +94,12 @@ public class PackagePanel : BasePanel
 #region UI菜单按钮
     private void OnClickButtonByType(ItemType type)
     {
+
         currentPanelItemType = type;
 
         UItypeName.GetComponent<Text>().text = GetTypeName(type);
+        
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
 
         //刷新背包格子
         RefreshScrollView();
@@ -222,6 +225,7 @@ public class PackagePanel : BasePanel
 /// </summary>
     private void OnClickDelect()
     {
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
         currentPanelMode = PanelMode.delect;
         UIDelectButton.gameObject.SetActive(false);
         UIDelectPanel.gameObject.SetActive(true);
@@ -231,6 +235,7 @@ public class PackagePanel : BasePanel
     /// </summary>
     private void OnClickBack()
     {
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
         currentPanelMode = PanelMode.normal;
         RefreshDelectState();
 
@@ -246,6 +251,7 @@ public class PackagePanel : BasePanel
 /// </summary>
     private void OnClickConfirmDelect()
     {
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
         if(delectUID == null || delectUID.Count == 0) return;
 
         PackageDataManage.Instance.DelectItems(delectUID);
@@ -257,6 +263,7 @@ public class PackagePanel : BasePanel
     /// </summary>
     private void OnClickRight()
     {
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
         if(typeSwitch.Length == 0) return;
 
         currentTypeIndex = (currentTypeIndex +1 + typeSwitch.Length)%typeSwitch.Length;
@@ -269,6 +276,7 @@ public class PackagePanel : BasePanel
 /// </summary>
     private void OnClickLeft()
     {
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
         if(typeSwitch.Length == 0) return;
 
         currentTypeIndex = (currentTypeIndex -1 + typeSwitch.Length)%typeSwitch.Length;
@@ -281,6 +289,7 @@ public class PackagePanel : BasePanel
 /// </summary>
     private void OnClickClose()
     {
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
         ClosePanel();
     }
     #endregion

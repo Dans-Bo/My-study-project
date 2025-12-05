@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     [SerializeField] float invulnerableDuration;
     [SerializeField] bool isInvulnerable; */
 
-    [SerializeField] Data_Health health;
+    [SerializeField] Data_HealthSO health;
 
     //public UnityEvent<Transform> onTakeDamage; //受伤事件
     public event Action OnHurt;
@@ -36,7 +36,7 @@ public class Health : MonoBehaviour
     }
 
 
-    public void TakeDamage(Data_Attack attack)
+    public void TakeDamage(Data_AttackSO attack)
     {
         if (health.isInvulnerable)
         {

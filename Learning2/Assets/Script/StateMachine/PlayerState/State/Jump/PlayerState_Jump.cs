@@ -15,6 +15,7 @@ public class PlayerState_Jump : PlayerState
         playerInput.HasJumpInputBuffer = false;
         playerController.SetVelocityY(jumpForce);
         //Instantiate(original: jumpVFX, position: playerController.transform.position, rotation: Quaternion.identity);
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_PlayerJump);
     }
 
     public override void Update()

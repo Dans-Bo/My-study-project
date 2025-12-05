@@ -11,10 +11,12 @@ public class PlayerState_Move : PlayerState
         base.Enter();
         playerController.CanAirJump = true;
         currentSpeed = playerController.MoveSpeed;
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_RunSound,true);
     }
 
     public override void Update()
     {
+       
         if (!playerInput.IsMove)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Idle));
@@ -57,6 +59,12 @@ public class PlayerState_Move : PlayerState
     {
         //playerController.SetVelocityX(runSpeed); //直接跑动
          playerController.Move(currentSpeed); 
+         
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        GameManage.Instance.audioManage.StopSFX();
     }
 
     

@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cddcc8200e337ea40adc5682a0198ca5, type: 3}
+  m_Name: AudioConfig
+  m_EditorClassIdentifier: 
+  audioConfigs:
+  - audioType: 0
+    audioClip: {fileID: 8300000, guid: 513197e4ea0798a4aa5c273b234bf22b, type: 3}
+    isBGM: 1
+    defaulVolume: 1
+  - audioType: 1
+    audioClip: {fileID: 8300000, guid: 0169ab575a0b2674aa561f967494d0ef, type: 3}
+    isBGM: 1
+    defaulVolume: 1
+  - audioType: 3
+    audioClip: {fileID: 8300000, guid: 33edc44ffaf894a43ae79bacc7d9b95e, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 4
+    audioClip: {fileID: 8300000, guid: d4c1ea2700976ee45bc08188d90c72dd, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 5
+    audioClip: {fileID: 8300000, guid: 39c3135c62a6c7a46b52deb814b77df4, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 2
+    audioClip: {fileID: 8300000, guid: 4a66a962dd3e91447a5ed254841974ad, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 6
+    audioClip: {fileID: 8300000, guid: f41550855f7c4c2409d1dfd48c835e03, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 11
+    audioClip: {fileID: 8300000, guid: fdcbb767aa7740d40a06d922c0e660f5, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 10
+    audioClip: {fileID: 8300000, guid: 5ab45410d400f494a8392178d29bdc3d, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 9
+    audioClip: {fileID: 8300000, guid: 29d917ed346b093478aa5bc1144d7fa9, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 7
+    audioClip: {fileID: 8300000, guid: f5ee4f8e3ad43ed4bbac27bec76461ac, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 12
+    audioClip: {fileID: 8300000, guid: 73db01ec2f33e534493215b751ee9b5d, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 14
+    audioClip: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+    isBGM: 0
+    defaulVolume: 1
+  - audioType: 13
+    audioClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+    isBGM: 0
+    defaulVolume: 1

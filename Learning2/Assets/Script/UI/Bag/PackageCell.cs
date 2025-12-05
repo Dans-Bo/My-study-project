@@ -61,6 +61,7 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
 #region 鼠标事件
     public void OnPointerClick(PointerEventData eventData)
     {
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
         if(UIParent.currentPanelMode == PanelMode.delect)
         {
             UIParent.AddDelectUID(localData.itemUID);
@@ -81,6 +82,7 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
     {
         animator.gameObject.SetActive(true);
         animator.GetComponent<Animator>().SetTrigger("in");
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseSlide);
     }
 
     public void OnPointerExit(PointerEventData eventData)
