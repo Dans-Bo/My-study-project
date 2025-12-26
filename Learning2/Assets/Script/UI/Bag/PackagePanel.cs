@@ -48,7 +48,7 @@ public class PackagePanel : BasePanel
 
     [SerializeField] private MenuButton[] menuButtons;  //页面切换管理
 
-    void Awake()
+    protected override void Awake()
     {
         InitClick();
         InitUI();
@@ -290,7 +290,7 @@ public class PackagePanel : BasePanel
     private void OnClickClose()
     {
         GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
-        ClosePanel();
+        UIManager.Instance.CloseCurrentActivePanel();
     }
     #endregion
 }

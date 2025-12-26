@@ -69,3 +69,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
     isBGM: 0
     defaulVolume: 1
+  - audioType: 16
+    audioClip: {fileID: 8300000, guid: 14011cb7ca7657848a8b53c72e426fe6, type: 3}
+    isBGM: 0
+    defaulVolume: 1

@@ -29,7 +29,7 @@ public class AudioPanel : BasePanel,IBeginDragHandler,IDragHandler,IEndDragHandl
     //private Vector2 originPanelPos;//鼠标按下时，面板的初始锚点位置
     //private Vector2 originMousePos;//开始拖动时鼠标的初始本地坐标
 
-    void Awake()
+    protected override void Awake()
     {
         panelRect = GetComponent<RectTransform>();
 
@@ -60,6 +60,7 @@ public class AudioPanel : BasePanel,IBeginDragHandler,IDragHandler,IEndDragHandl
 
     private void OnClickHome()
     {
+        UIManager.Instance.OpenPanel(ConstUIName.homePanel);
         ClosePanel();
     }
 
@@ -85,7 +86,7 @@ public class AudioPanel : BasePanel,IBeginDragHandler,IDragHandler,IEndDragHandl
 
     private void OnclickClose()
     {
-        ClosePanel();
+        UIManager.Instance.CloseCurrentActivePanel();
     }
 /// <summary>
 /// 开始拖动

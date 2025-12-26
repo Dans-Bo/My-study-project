@@ -31,6 +31,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "6b475c33-e95d-4b3c-82cc-5c26bb318b12",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ESC",
+                    "type": "Button",
+                    "id": "5c5fe9af-741a-4f9d-a094-884748a3cbb4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Bag",
+                    "type": "Button",
+                    "id": "6598ec8d-95bb-4973-a605-c954d8040d03",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -121,6 +148,39 @@
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65226d99-34fb-44cb-9e2e-fc3c9fe0c9cb",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7944c648-c66a-4f91-a892-1a88ec3b9dcc",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53995183-1a4c-47a5-af58-0536579bd26d",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Bag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -129,9 +189,18 @@
             "id": "65bc8fdd-568e-4244-b2a0-62cf38e7f19e",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "ESC",
                     "type": "Button",
                     "id": "cd8c5a09-1f5e-4c64-9b3c-a3753a4d783e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseBag",
+                    "type": "Button",
+                    "id": "6b55aee5-9b28-47d9-b3e8-b8fad0dd2fa9",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -142,11 +211,22 @@
                 {
                     "name": "",
                     "id": "e4f2fc5d-939c-4af1-88ef-3dd040819ca3",
-                    "path": "",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "ESC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "caefc3b8-7782-468d-a233-49060d0d3af1",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseBag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

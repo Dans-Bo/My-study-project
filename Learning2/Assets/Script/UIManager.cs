@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class ConstUIName
 {
     public const string packagePanel = "PackagePanel";
     public const string audioPanel = "AudioPanel";
+    public const string interfaceSettingPanel = "InterfaceSettingPanel";
+    public const string homePanel = "HomePanel";
+    public const string lootsBoxPanel = "LootsBoxPanel";
 }
 
 public class UIManager
@@ -18,6 +22,30 @@ public class UIManager
     private Dictionary<string,string> prefabPathDic;   //预制体路径
     private Dictionary<string, GameObject> panelPrefabDic; //预制体缓存
     public Dictionary<string, BasePanel> openPanelsDic; //已打开面板
+
+    public string CurrentActivePanel {get ; private set;} //当前已打开面板
+
+    private PlayerInput _playerInput;
+    private PlayerInput PlayerInput
+    {
+        get
+        {
+            if(_playerInput == null)
+            {
+                //通过标签查找
+                GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+                if(playerObj != null)
+                {
+                    _playerInput = playerObj.GetComponent<PlayerInput>();
+                }
+                if(_playerInput == null)
+                {
+                    Debug.LogWarning("未找到PlayerInput组件");
+                }
+            }
+            return _playerInput;
+        }
+    }
 
     private static UIManager _instance;
     public static UIManager Instance
@@ -60,6 +88,8 @@ public class UIManager
         canvasScaler.referenceResolution = new Vector2(1920,1080);
         canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
 
+        canvasObj.AddComponent<GraphicRaycaster>();
+
         _uiRoot = canvasObj.transform;
     }
 
@@ -74,10 +104,14 @@ public class UIManager
     {
         panelPrefabDic = new Dictionary<string, GameObject>();
         openPanelsDic = new Dictionary<string, BasePanel>();
+        CurrentActivePanel = string.Empty;
         prefabPathDic = new Dictionary<string, string>()
         {
             {ConstUIName.packagePanel, "Package/PackagePanel"},
-            {ConstUIName.audioPanel,"AudioSetting/AudioPanel"}
+            {ConstUIName.audioPanel,"AudioSetting/AudioPanel"},
+            {ConstUIName.interfaceSettingPanel,"InterfaceSetting/InterfaceSettingPanel"},
+            {ConstUIName.homePanel,"HomePanel"},
+            {ConstUIName.lootsBoxPanel, "LootBox/BoxPanel"},
         };
     }
 /// <summary>
@@ -119,10 +153,13 @@ public class UIManager
             panelPrefabDic.Add(panelName, panel);
         }
 
-        //打开面板
+        //实例化面板
         GameObject panelObj = GameObject.Instantiate(panel,UIRoot,false);
         basePanel = panelObj.GetComponent<BasePanel>();
         openPanelsDic.Add(panelName, basePanel);
+        CurrentActivePanel = panelName;
+
+        SwitchUIActionMap();
         
         basePanel.OpenPanel(panelName);
         return basePanel;
@@ -143,13 +180,67 @@ public class UIManager
             return false;
         }
 
+        /* if(CurrentActivePanel == panelName)
+        {
+            CurrentActivePanel = string.Empty;
+            Debug.Log($"已关闭当前面板：{panelName}");
+        } */
+
         basePanel.ClosePanel();
+        Debug.Log($"已关闭面板{panelName}, 剩余打开面板数量：{openPanelsDic.Count}");
+        
+        CurrentActivePanel = openPanelsDic.Count > 0 ? openPanelsDic.Keys.Last() : string.Empty;  //获取最后一个打开的面板
+        if(openPanelsDic.Count == 0)
+        {
+            SwitchGameActionMap();    
+        }
+        else SwitchUIActionMap();
+           
         return true;
     }
+/// <summary>
+/// 关闭当前面板
+/// </summary>
+/// <returns></returns>
+    public bool CloseCurrentActivePanel()
+    {
+        if(string.IsNullOrEmpty(CurrentActivePanel))
+        {
+            Debug.Log("当前无已激活面板");
+            return false;
+        }
 
+        return ClosePanel (CurrentActivePanel);
+    }
+/// <summary>
+/// 清除打开面板缓存
+/// </summary>
+/// <returns></returns>
     public bool ClearnOpenPanelDict()
     {
         openPanelsDic.Clear();
         return true;
+    }
+/// <summary>
+/// 切换到UI控制
+/// </summary>
+    private void SwitchUIActionMap()
+    {
+        if(PlayerInput != null)
+        {
+            PlayerInput.EnableUIActionMap();
+             Debug.Log("切换到UI控制");
+        }
+    }
+/// <summary>
+/// 切换到Game控制
+/// </summary>
+    private void SwitchGameActionMap()
+    {
+        if(PlayerInput != null)
+        {
+            PlayerInput.EnableGameplayerInput();
+             Debug.Log("切换到GAME控制");
+        }
     }
 }

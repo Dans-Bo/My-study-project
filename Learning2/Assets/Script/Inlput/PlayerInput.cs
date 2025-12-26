@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    PlayerInputController playerInputActions;
+    private PlayerInputController playerInputActions;
 
     //移动属性
     Vector2 Axes => playerInputActions.Game.Move.ReadValue<Vector2>();
@@ -22,43 +22,81 @@ public class PlayerInput : MonoBehaviour
     public bool IsAttack => playerInputActions.Game.Attack.WasPressedThisFrame();
     public bool IsStopAttack => playerInputActions.Game.Attack.WasReleasedThisFrame();
 
+    //按键交互
+    public bool IsConfirm => playerInputActions.Game.Confirm.WasPressedThisFrame(); //f键交互
+    public bool isGameESC => playerInputActions.Game.ESC.WasPressedThisFrame(); //正常状态下ESC键
+    public bool isUIEsc => playerInputActions.UI.ESC.WasPressedThisFrame(); //UI状态下ESC
+    //public bool isOpenBag => playerInputActions.Game.
+
 
     void Awake()
     {
-        playerInputActions = new PlayerInputController();
+        if (playerInputActions == null)
+        {
+            playerInputActions = new PlayerInputController();
+        }
+
         waitJumpInputBufferTime = new WaitForSeconds(jumpInputBufferTime);
     }
 
     void OnEnable()
     {
-        playerInputActions.Game.Jump.canceled += delegate
+        if (playerInputActions != null)
         {
-            HasJumpInputBuffer = false;
-        };
+            playerInputActions.Game.Enable(); 
+        
+            playerInputActions.Game.Jump.canceled += delegate
+            {
+                HasJumpInputBuffer = false;
+            };
+        }else Debug.Log("OnEnable 时，playerInputAction为空");
     }
 
-   /*   void OnGUI()
+    void OnDisable()
     {
-        Rect rect = new Rect(200, 200, 200, 200);
-        string message = "Has Jump Input Buffer:" +jumpInputBufferTime ;
-        GUIStyle style = new GUIStyle();
-
-        style.fontSize = 20;
-        style.fontStyle = FontStyle.Bold;
-        GUI.Label(rect, message, style);
-    }  */ 
+        playerInputActions?.Game.Disable();
+    }
 
     /// <summary>
-    /// 启用控制表
+    /// 启用玩家控制表
     /// </summary>
     public void EnableGameplayerInput()
     {
+        if(playerInputActions == null)
+        {
+            Debug.LogError("EnableGameplayerInput：playerInputActions为null，已自动重新初始化");
+            playerInputActions = new PlayerInputController(); 
+        }
+
         playerInputActions.Game.Enable();
-        //Cursor.lockState = CursorLockMode.Locked; //将鼠标光标设置为锁定模式
+        playerInputActions.UI.Disable();
+        Cursor.lockState = CursorLockMode.Locked; //将鼠标光标设置为锁定模式
+        Cursor.visible = false; //隐藏鼠标光标
     }
     public void DisableGamePlayerInput()
     {
         playerInputActions.Game.Disable();
+    }
+/// <summary>
+/// 启用UI控制
+/// </summary>
+    public void EnableUIActionMap()
+    {
+        if (playerInputActions != null) 
+        {
+            playerInputActions.Game.Disable();
+            playerInputActions.UI.Enable();
+            Cursor.lockState = CursorLockMode.None; //解锁光标
+            Cursor.visible = true; //显示光标
+        }
+    }
+    /// <summary>
+    /// 禁用ui控制，并切换回game控制
+    /// </summary>
+    public void DisableUIAcitionMap()
+    {
+        EnableGameplayerInput();
+
     }
     /// <summary>
     /// 启用预输入跳跃协程
@@ -69,7 +107,7 @@ public class PlayerInput : MonoBehaviour
         StartCoroutine(nameof(JumpInputBufferCoroutine));
     }
 
-    IEnumerator JumpInputBufferCoroutine()
+    private IEnumerator JumpInputBufferCoroutine()
     {
         HasJumpInputBuffer = true;
 

@@ -117,6 +117,33 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b475c33-e95d-4b3c-82cc-5c26bb318b12"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c5fe9af-741a-4f9d-a094-884748a3cbb4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Bag"",
+                    ""type"": ""Button"",
+                    ""id"": ""6598ec8d-95bb-4973-a605-c954d8040d03"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +234,39 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65226d99-34fb-44cb-9e2e-fc3c9fe0c9cb"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7944c648-c66a-4f91-a892-1a88ec3b9dcc"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53995183-1a4c-47a5-af58-0536579bd26d"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -215,9 +275,18 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             ""id"": ""65bc8fdd-568e-4244-b2a0-62cf38e7f19e"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""ESC"",
                     ""type"": ""Button"",
                     ""id"": ""cd8c5a09-1f5e-4c64-9b3c-a3753a4d783e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseBag"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b55aee5-9b28-47d9-b3e8-b8fad0dd2fa9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -228,11 +297,22 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                 {
                     ""name"": """",
                     ""id"": ""e4f2fc5d-939c-4af1-88ef-3dd040819ca3"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caefc3b8-7782-468d-a233-49060d0d3af1"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseBag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -246,9 +326,13 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         m_Game_Move = m_Game.FindAction("Move", throwIfNotFound: true);
         m_Game_Jump = m_Game.FindAction("Jump", throwIfNotFound: true);
         m_Game_Attack = m_Game.FindAction("Attack", throwIfNotFound: true);
+        m_Game_Confirm = m_Game.FindAction("Confirm", throwIfNotFound: true);
+        m_Game_ESC = m_Game.FindAction("ESC", throwIfNotFound: true);
+        m_Game_Bag = m_Game.FindAction("Bag", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        m_UI_ESC = m_UI.FindAction("ESC", throwIfNotFound: true);
+        m_UI_CloseBag = m_UI.FindAction("CloseBag", throwIfNotFound: true);
     }
 
     ~@PlayerInputController()
@@ -333,6 +417,9 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     private readonly InputAction m_Game_Move;
     private readonly InputAction m_Game_Jump;
     private readonly InputAction m_Game_Attack;
+    private readonly InputAction m_Game_Confirm;
+    private readonly InputAction m_Game_ESC;
+    private readonly InputAction m_Game_Bag;
     /// <summary>
     /// Provides access to input actions defined in input action map "Game".
     /// </summary>
@@ -356,6 +443,18 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// Provides access to the underlying input action "Game/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Game_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/Confirm".
+        /// </summary>
+        public InputAction @Confirm => m_Wrapper.m_Game_Confirm;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/ESC".
+        /// </summary>
+        public InputAction @ESC => m_Wrapper.m_Game_ESC;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/Bag".
+        /// </summary>
+        public InputAction @Bag => m_Wrapper.m_Game_Bag;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -391,6 +490,15 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @ESC.started += instance.OnESC;
+            @ESC.performed += instance.OnESC;
+            @ESC.canceled += instance.OnESC;
+            @Bag.started += instance.OnBag;
+            @Bag.performed += instance.OnBag;
+            @Bag.canceled += instance.OnBag;
         }
 
         /// <summary>
@@ -411,6 +519,15 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @ESC.started -= instance.OnESC;
+            @ESC.performed -= instance.OnESC;
+            @ESC.canceled -= instance.OnESC;
+            @Bag.started -= instance.OnBag;
+            @Bag.performed -= instance.OnBag;
+            @Bag.canceled -= instance.OnBag;
         }
 
         /// <summary>
@@ -448,7 +565,8 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Newaction;
+    private readonly InputAction m_UI_ESC;
+    private readonly InputAction m_UI_CloseBag;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -461,9 +579,13 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// </summary>
         public UIActions(@PlayerInputController wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "UI/Newaction".
+        /// Provides access to the underlying input action "UI/ESC".
         /// </summary>
-        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputAction @ESC => m_Wrapper.m_UI_ESC;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/CloseBag".
+        /// </summary>
+        public InputAction @CloseBag => m_Wrapper.m_UI_CloseBag;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -490,9 +612,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @ESC.started += instance.OnESC;
+            @ESC.performed += instance.OnESC;
+            @ESC.canceled += instance.OnESC;
+            @CloseBag.started += instance.OnCloseBag;
+            @CloseBag.performed += instance.OnCloseBag;
+            @CloseBag.canceled += instance.OnCloseBag;
         }
 
         /// <summary>
@@ -504,9 +629,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// <seealso cref="UIActions" />
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @ESC.started -= instance.OnESC;
+            @ESC.performed -= instance.OnESC;
+            @ESC.canceled -= instance.OnESC;
+            @CloseBag.started -= instance.OnCloseBag;
+            @CloseBag.performed -= instance.OnCloseBag;
+            @CloseBag.canceled -= instance.OnCloseBag;
         }
 
         /// <summary>
@@ -568,6 +696,27 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ESC" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnESC(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Bag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBag(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -577,11 +726,18 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     public interface IUIActions
     {
         /// <summary>
-        /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ESC" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CloseBag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCloseBag(InputAction.CallbackContext context);
     }
 }
