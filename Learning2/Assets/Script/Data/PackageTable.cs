@@ -23,6 +23,7 @@ public class PackageTableData
     public string itemDetails;
     public int itemMaxStackSize; //最大堆叠数
     public Sprite itemIcon;
+    public int weight;//权重
 }
 
 /// <summary>

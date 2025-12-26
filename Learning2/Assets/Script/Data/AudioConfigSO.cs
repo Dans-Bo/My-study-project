@@ -15,7 +15,8 @@ public enum AudioType
     //声音
     Voice_PlayerAttack,Voic_PlayerHurt,
     Voice_MinorHurt,
-    SFX_PlayerJump2,SFX_MouseSlide,SFX_MouseClick,SFX_MinoAttack
+    SFX_PlayerJump2,SFX_MouseSlide,SFX_MouseClick,SFX_MinoAttack,
+    SFX_OpenBox
 
 
 }

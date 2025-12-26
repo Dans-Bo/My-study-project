@@ -540,7 +540,6 @@ GameObject:
   - component: {fileID: 2111638148213511926}
   - component: {fileID: 7146991144838082839}
   - component: {fileID: 2094471918321034222}
-  - component: {fileID: 837960267624331806}
   m_Layer: 5
   m_Name: CellPanel
   m_TagString: Untagged
@@ -610,23 +609,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &837960267624331806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6035063871316076734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1041ff8dac44a3642aafd4f1fe2c1165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIEquippedIcon: {fileID: 9056737170987146403}
-  UIItemIcon: {fileID: 6420335218692982019}
-  UIItemNumText: {fileID: 611840012650633928}
-  UISelect: {fileID: 3290902869495404920}
-  animator: {fileID: 6528647627154812895}
 --- !u!1 &6976935240619847965
 GameObject:
   m_ObjectHideFlags: 0

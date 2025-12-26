@@ -8,18 +8,35 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class PlayerController : MonoBehaviour
 {
-    PhysicsCheck physicsCheck;
-    PlayerInput playerInput;
-    Rigidbody2D rb2D;
-    Health health;
+    private PhysicsCheck physicsCheck;
+    private PlayerInput playerInput;
+    private Rigidbody2D rb2D;
+    private Health health;
+    private IInteractable currentInteractable;  //可交互物体
+
 
     #region 移动
     public bool IsGround => physicsCheck.isGround;
     public bool IsFall => physicsCheck.IsFall;
     public bool IsWall => physicsCheck.isWall;
     public bool CanAirJump { get; set; } = true;
-    public float MoveSpeed => Mathf.Abs(rb2D.velocity.x);
-    public float CurrentGravityScale => rb2D.gravityScale;
+    public float MoveSpeed
+    {
+        get
+        {
+            if(rb2D == null) return 0f;
+            return Mathf.Abs(rb2D.velocity.x);
+        }
+    } 
+    public float CurrentGravityScale
+    {
+        get
+        {
+            if(rb2D == null) return 0f;
+            return rb2D.gravityScale;
+        }
+    }
+    
     public float PlayerDirection
     {
         get => transform.localScale.x;
@@ -43,12 +60,14 @@ public class PlayerController : MonoBehaviour
         }
     }
     public bool IsAttackTimerRunning => AttackTime > 0f;
-    public int AttackCombo { get; set; } = 1;
+    public int AttackCombo {get;set;}  = 1;
     #endregion
 
-    public bool IsHurt { get; set; } = false;
-    public bool IsDie { get; set; } = false;
-    
+    public bool IsHurt {get;set;}  = false;
+    public bool IsDie {get;set;}  = false;
+
+
+
     void Awake()
     {
         physicsCheck = GetComponentInChildren<PhysicsCheck>();
@@ -57,29 +76,53 @@ public class PlayerController : MonoBehaviour
         health = GetComponent<Health>();
     }
 
-    void Start()
-    {
-
-    }
-
     void OnEnable()
     {
-        playerInput.EnableGameplayerInput();
-        health.OnHurt += IsOnHurt;
-        health.OnDie += IsOnDie;
+        if (playerInput != null)
+        {
+            // 延迟一帧执行，确保 PlayerInput.Awake 已完成
+            Invoke(nameof(EnableInputDelayed), 0.01f);
+            playerInput.EnableGameplayerInput();
+        }
+        
+        if(health != null)
+        {
+            health.OnHurt += IsOnHurt;
+            health.OnDie += IsOnDie;
+        }
+    }
+
+    private void EnableInputDelayed()
+    {
+        if (playerInput != null)
+        {
+            playerInput.EnableGameplayerInput();
+        }
     }
 
     void OnDisable()
     {
-        playerInput.DisableGamePlayerInput();
-        health.OnHurt -= IsOnHurt;
-        health.OnDie -= IsOnDie;
+        if(playerInput != null)
+        {
+            playerInput.DisableGamePlayerInput();
+        }
+        
+        if(health != null)
+        {
+            health.OnHurt -= IsOnHurt;
+            health.OnDie -= IsOnDie;
+        }
     }
 
     void Update()
     {
         AttackTimeCount();
 
+        //按下F键且存在可交互物体
+        if(playerInput.IsConfirm && currentInteractable != null)
+        {
+            currentInteractable.TriggerAction();
+        }
     }
 
 
@@ -168,16 +211,27 @@ public class PlayerController : MonoBehaviour
         IsDie = true;
         //Debug.Log("Die is" +IsDie);   
     }
-    
-   /*    void OnGUI()
-         {
-             Rect rect = new Rect(200, 200, 200, 200);
-             var message ="时间" + attackTime +"联机"+ AttackCombo ;
-             GUIStyle style = new()
-             {
-                 fontSize = 20,
-                 fontStyle = FontStyle.Bold
-             };
-             GUI.Label(rect,  message, style);
-         } */
+
+/// <summary>
+/// 记录当前可交互物体
+/// </summary>
+/// <param name="collision"></param>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent(out IInteractable interactable))
+        {
+            currentInteractable = interactable; //记录当前可交互物体
+        }
+    }
+
+    ///清除当前可交互物体
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.TryGetComponent(out IInteractable interactable) && interactable == currentInteractable)
+        {
+            currentInteractable = null ;
+        }
+    }
+
+
 }
