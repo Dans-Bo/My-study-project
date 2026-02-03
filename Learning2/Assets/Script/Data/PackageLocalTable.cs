@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
@@ -38,10 +39,10 @@ public class PackageLocalTable
     /// <summary>
     /// 保存背包数据
     /// </summary>
-    public void SavePackageData()
+    public async Task SavePackageData()
     {
         var wrapper = new PackageWrapper{ data = LocalTables};
-        LocalDataSetting.SavelByJson(saveFileName, wrapper);
+        await LocalDataSetting.SavelByJson(saveFileName, wrapper);
     }
     /// <summary>
     /// 读取背包数据
@@ -49,7 +50,7 @@ public class PackageLocalTable
     public void LoadPackageData()
     {
         var wrapper = LocalDataSetting.LoadFromJson<PackageWrapper>(saveFileName);
-        LocalTables = wrapper.data;
+        LocalTables = wrapper != null ? wrapper.data : new List<PackageLocalTableData>();
     }
 /// <summary>
 /// 添加物品
@@ -67,26 +68,28 @@ public class PackageLocalTable
 /// <param name="itemUID"></param>
 /// <param name="canSave"></param>
 /// <returns></returns>
-    public bool RemoveItem(string itemUID , bool canSave = true)
+    public async Task<bool> RemoveItem(string itemUID , bool canSave = true)
     {
-
-        foreach(PackageLocalTableData item in LocalTables )
+        for(int i =0; i< LocalTables.Count; i++)
         {
-            if(item.itemUID ==itemUID )
+            if(LocalTables[i].itemUID == itemUID)
             {
-                LocalTables.Remove(item);
+                LocalTables.RemoveAt(i);
 
-                if(canSave) SavePackageData();
+                if(canSave) await SavePackageData();
                 return true;
             }
         }
         return false;
     }
-
-    public bool ClearnPackage()
+/// <summary>
+/// 清空背包
+/// </summary>
+/// <returns></returns>
+    public async Task<bool> ClearnPackage()
     {
         LocalTables.Clear();
-        
+        await SavePackageData();
         return true;
     }
 
@@ -103,7 +106,13 @@ public class PackageLocalTable
 [Serializable]
 public class PackageLocalTableData
 {
-    public int itemID;
-    public string itemUID;
-    public int itemCount;
+    public int itemID = 0;
+    public string itemUID = string.Empty;
+    public bool isEquip = false;
+    public int itemLevel = 1;
+    public int itemCount =1 ;
+    public int addAttackPower = 0;
+    public int addDefense = 0;
+    public int addMaxHP = 0;
+    public int addMaxMP = 0;
 }

@@ -48,11 +48,13 @@ public class PlayerState_Move : PlayerState
                     break;
             }
         }
+        
         if (playerController.IsHurt)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Hurt));
         }
-            currentSpeed = Mathf.MoveTowards(currentSpeed, runSpeed, acceleration * Time.deltaTime);
+
+        currentSpeed = Mathf.MoveTowards(currentSpeed, runSpeed, acceleration * Time.deltaTime);
     }
 
     public override void FixedUpadte()

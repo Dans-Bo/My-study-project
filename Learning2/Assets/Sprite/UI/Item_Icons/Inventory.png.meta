@@ -810,6 +810,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Inventory_1
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 16
+        width: 49
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2b5364968f46154990270dd17b07546
+      internalID: -1695082973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -827,6 +848,7 @@ TextureImporter:
       Bag_grid_1: 310990125
       CloseButton: 560085302
       Inventory_0: -1978972796
+      Inventory_1: -1695082973
       Inventory_10: -1853179416
       Inventory_11: -125883666
       Inventory_12: -296900718

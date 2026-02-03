@@ -20,10 +20,11 @@ public class PackageTableData
     public int itemID;
     public string itemName;
     public ItemType itemType;
+    public EquipmentType equipType;
     public string itemDetails;
     public int itemMaxStackSize; //最大堆叠数
     public Sprite itemIcon;
-    public int weight;//权重
+    public int weight;//随机权重
 }
 
 /// <summary>
@@ -32,4 +33,14 @@ public class PackageTableData
 public enum ItemType
 {
     equipment,food,potion,material
+}
+public enum EquipmentType
+{
+    None,
+    Weapon,
+    Helmet,
+    Armor,
+    Ring,
+    Necklace,
+    Shoe,
 }

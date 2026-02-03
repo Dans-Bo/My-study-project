@@ -20,13 +20,20 @@ public class PlayerInput : MonoBehaviour
 
     //攻击属性
     public bool IsAttack => playerInputActions.Game.Attack.WasPressedThisFrame();
-    public bool IsStopAttack => playerInputActions.Game.Attack.WasReleasedThisFrame();
+    //public bool IsStopAttack => playerInputActions.Game.Attack.WasReleasedThisFrame();
 
-    //按键交互
+    #region UI交互
     public bool IsConfirm => playerInputActions.Game.Confirm.WasPressedThisFrame(); //f键交互
     public bool isGameESC => playerInputActions.Game.ESC.WasPressedThisFrame(); //正常状态下ESC键
     public bool isUIEsc => playerInputActions.UI.ESC.WasPressedThisFrame(); //UI状态下ESC
-    //public bool isOpenBag => playerInputActions.Game.
+    //背包操作
+    public bool isOpenBag => playerInputActions.Game.Bag.WasPressedThisFrame(); //打开背包
+    public bool isClosedBag => playerInputActions.UI.ClosedBag.WasPressedThisFrame(); //关闭背包
+
+    //装备&属性界面
+    public bool isOpenEquipPanel => playerInputActions.Game.EquipPanel.WasPressedThisFrame();
+    public bool isCloseEquipPanel => playerInputActions.UI.CloseEquipPanel.WasPressedThisFrame();
+    #endregion
 
 
     void Awake()

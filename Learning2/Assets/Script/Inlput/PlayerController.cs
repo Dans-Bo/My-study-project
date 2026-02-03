@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private Rigidbody2D rb2D;
     private Health health;
-    private IInteractable currentInteractable;  //可交互物体
+    public IInteractable currentInteractable;  //可交互物体
 
 
     #region 移动
@@ -117,12 +117,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         AttackTimeCount();
-
-        //按下F键且存在可交互物体
-        if(playerInput.IsConfirm && currentInteractable != null)
-        {
-            currentInteractable.TriggerAction();
-        }
     }
 
 

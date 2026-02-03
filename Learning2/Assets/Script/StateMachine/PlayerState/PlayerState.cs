@@ -26,7 +26,7 @@ public class PlayerState : ScriptableObject,IState
         stateAnimatorNameHash = Animator.StringToHash(stateAnimatorName);
     }
     /// <summary>
-    /// 初始化组件，提供引用 （依赖注入方法）
+    /// 初始化组件
     /// </summary>
     /// <param name="animator"></param>
     /// <param name="playerStateMachine"></param>

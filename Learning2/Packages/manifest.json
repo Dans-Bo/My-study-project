@@ -1,4 +1,5 @@
 {
+  "registry": "https://packages.unity.cn",  
   "dependencies": {
     "com.unity.addressables": "1.22.3",
     "com.unity.cinemachine": "2.10.3",
