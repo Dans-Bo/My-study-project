@@ -5,8 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerUIController : MonoBehaviour
 {
-    //private bool isUIPanelOpen = false;
-    //private bool isInputProcessing = false;
+    private PlayerController playerCtrl;
 
     private PlayerInput PlayerInput //延迟初始化
     {
@@ -22,68 +21,33 @@ public class PlayerUIController : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        playerCtrl = GetComponent<PlayerController>();
+    }
+
     void Update()
     {
         if(PlayerInput.isGameESC) UIManager.Instance.OpenPanel(ConstUIName.homePanel);
         if( PlayerInput.isUIEsc) UIManager.Instance.CloseCurrentActivePanel();
-        
+        CheckUiInput();
     }
 
-   /*  private void HandleGameESC()
+    private void CheckUiInput()
     {
-        if(PlayerInput.isGameESC && !isUIPanelOpen)
+        //打开&关闭背包界面
+        if(PlayerInput.isOpenBag) UIManager.Instance.OpenPanel(ConstUIName.packagePanel);
+        if(PlayerInput.isClosedBag) UIManager.Instance.CloseCurrentActivePanel();
+
+        //按下F键且存在可交互物体
+        if(PlayerInput.IsConfirm && playerCtrl.currentInteractable != null)
         {
-            StartCoroutine(ProcessGameEsc());
+            playerCtrl.currentInteractable.TriggerAction();
         }
+
+        //打开&关闭装备界面
+        if(PlayerInput.isOpenEquipPanel) UIManager.Instance.OpenPanel(ConstUIName.equipmentPanel);
+        if(PlayerInput.isCloseEquipPanel) UIManager.Instance.CloseCurrentActivePanel();
     }
-
-   
-
-    private IEnumerator ProcessGameEsc()
-    {
-        isInputProcessing = true;
-
-        playerInput.DisableGamePlayerInput();
-        playerInput.EnableUIActionMap();
-
-        if(UIManager.Instance != null)
-        {
-            UIManager.Instance.OpenPanel(ConstUIName.homePanel);
-            isUIPanelOpen = true;
-        }
-        else
-        {
-            Debug.LogError($"[{nameof(PlayerUIController)}] UIManager为空",this);
-            playerInput.EnableGameplayerInput(); //回滚输入映射
-        }
-
-        //等待一帧，防止重复触发
-        yield return null ;
-        isInputProcessing = false;
-    }
-
-    private void HandleUIESC()
-    {
-        if(playerInput.isUIEsc && !isInputProcessing )
-        {
-            StartCoroutine(ProcessUIESC());
-        }
-    }
-
-    private IEnumerator ProcessUIESC()
-    {
-        isInputProcessing = true;
-
-        bool isClosed = UIManager.Instance.CloseCurrentActivePanel();
-        if(isClosed)
-        {
-            playerInput.DisableUIAcitionMap();
-            playerInput.EnableGameplayerInput();
-        }
-
-        yield return null;
-        isInputProcessing = false;
-    } */
-
     
 }

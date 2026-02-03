@@ -5,13 +5,9 @@ using UnityEngine;
 public class BasePanel : MonoBehaviour
 {
     protected new string name = "";
-    protected RectTransform rectTransform; //面板的transform
-    protected RectTransform canvasRect; //画布的transform
-
     protected virtual void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
-        canvasRect = UIManager.Instance.UIRoot.GetComponent<RectTransform>();
+
     }
 
     public virtual void UIActive(bool active)

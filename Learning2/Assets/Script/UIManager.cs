@@ -15,6 +15,7 @@ public class ConstUIName
     public const string interfaceSettingPanel = "InterfaceSettingPanel";
     public const string homePanel = "HomePanel";
     public const string lootsBoxPanel = "LootsBoxPanel";
+    public const string equipmentPanel = "EquipmentPanel";
 }
 
 public class UIManager
@@ -112,6 +113,7 @@ public class UIManager
             {ConstUIName.interfaceSettingPanel,"InterfaceSetting/InterfaceSettingPanel"},
             {ConstUIName.homePanel,"HomePanel"},
             {ConstUIName.lootsBoxPanel, "LootBox/BoxPanel"},
+            {ConstUIName.equipmentPanel,"Equipment/EquipmentPanel"},
         };
     }
 /// <summary>

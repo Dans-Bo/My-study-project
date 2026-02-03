@@ -1,10 +1,11 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public static class LocalDataSetting 
 {
-    public static void SavelByJson(string fileName , object data)
+    public static async Task SavelByJson(string fileName , object data)
     {
         var json = JsonUtility.ToJson(data);
         var directoryPath = Application.persistentDataPath;
@@ -14,7 +15,8 @@ public static class LocalDataSetting
         {
             if(! Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
 
-            File.WriteAllText(path, json);
+            //File.WriteAllText(path, json);
+            await File.WriteAllTextAsync(path, json); //异步写入
 
             #if UNITY_EDITOR
             Debug.Log($"成功保存数据到{path}");

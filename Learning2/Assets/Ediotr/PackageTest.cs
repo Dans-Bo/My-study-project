@@ -7,7 +7,7 @@ using UnityEngine;
 public class PackageTest 
 {
 
-    [MenuItem("GMCmd/读取背包静态数据")]
+    [MenuItem("GMCmd/背包/读取背包静态数据")]
     public static void LoadPackage()
     {
         PackageTable table = PackageDataManage.Instance.PackageTable;
@@ -23,7 +23,7 @@ public class PackageTest
             }else Debug.Log("空数据");   
         }else Debug.Log("加载失败，检查路径或文件");
     }
-    [MenuItem("GMCmd/创建动态数据/依次创建")]
+    [MenuItem("GMCmd/背包/创建动态数据/依次创建")]
      public static void CreatLocalData()
     {
         //List<PackageLocalTableData> items = new List<PackageLocalTableData>();
@@ -38,9 +38,9 @@ public class PackageTest
             };
             PackageLocalTable.Instance.AddItem(itme);
         }
-        PackageLocalTable.Instance.SavePackageData();
+        _ =PackageLocalTable.Instance.SavePackageData();
     } 
-    [MenuItem("GMCmd/读取态数据")]
+    [MenuItem("GMCmd/背包/读取态数据")]
     public static void LoadLocalData()
     {
         PackageLocalTable.Instance.LoadPackageData();
@@ -51,23 +51,23 @@ public class PackageTest
         }
     }
 
-    [MenuItem("GMCmd/打开背包")]
+    [MenuItem("GMCmd/背包/打开背包")]
     public static void OpenPackagePanel()
     {
         UIManager.Instance.OpenPanel(ConstUIName.packagePanel);
     }
 
-    [MenuItem("GMCmd/清空背包")]
+    [MenuItem("GMCmd/背包/清空背包")]
     public static void ClearnPackage()
     {
-        PackageLocalTable.Instance.ClearnPackage();
+        _ = PackageLocalTable.Instance.ClearnPackage();
     }
-    [MenuItem("GMCmd/创建动态数据/创建苹果")]
+    [MenuItem("GMCmd/背包/创建动态数据/创建苹果")]
     public static void CreatApple()
     {
         PackageDataManage.Instance.AddItem(18,30);
     }
-    [MenuItem("GMCmd/创建动态数据/创建药水")]
+    [MenuItem("GMCmd/背包/创建动态数据/创建药水")]
     public static void CreatPotion()
     {
         PackageDataManage.Instance.AddItem(15,20);
@@ -78,7 +78,7 @@ public class PackageTest
     {
         UIManager.Instance.OpenPanel(ConstUIName.audioPanel);
     }
-    [MenuItem("GMCmd/清除打开面板缓存")]
+    [MenuItem("GMCmd/背包/清除打开面板缓存")]
     public static void ClearOpenpanel()
     {
         UIManager.Instance.ClearnOpenPanelDict();

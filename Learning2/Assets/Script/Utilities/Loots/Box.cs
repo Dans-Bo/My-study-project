@@ -20,8 +20,7 @@ public class Box : MonoBehaviour,IInteractable
     {
         spriteRenderer.sprite = isDone? openSprite : closeSprite;
     }
-
-
+    
     public void TriggerAction()
     {
         Debug.Log("打开箱子");

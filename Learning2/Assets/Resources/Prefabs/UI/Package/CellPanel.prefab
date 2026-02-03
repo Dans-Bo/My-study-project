@@ -540,6 +540,8 @@ GameObject:
   - component: {fileID: 2111638148213511926}
   - component: {fileID: 7146991144838082839}
   - component: {fileID: 2094471918321034222}
+  - component: {fileID: 7670794014437257609}
+  - component: {fileID: 785400338804761393}
   m_Layer: 5
   m_Name: CellPanel
   m_TagString: Untagged
@@ -609,6 +611,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &7670794014437257609
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035063871316076734}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &785400338804761393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035063871316076734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1041ff8dac44a3642aafd4f1fe2c1165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIEquippedIcon: {fileID: 6088747331122588568}
+  UIItemIcon: {fileID: 6420335218692982019}
+  UIItemNumText: {fileID: 611840012650633928}
+  UISelect: {fileID: 3290902869495404920}
+  animator: {fileID: 6528647627154812895}
 --- !u!1 &6976935240619847965
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,12 +8,14 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
     [SerializeField] private Transform UIItemIcon; // 物品图标
                      private Image UIIcon; //图标
     [SerializeField] private Transform UIItemNumText; //物品数量
-    [SerializeField] private Transform UISelect; //删除时，选中标识
+                     public Transform UISelect; //删除时，选中标识
     [SerializeField] private Transform animator;
-
+    
     private PackageTableData tableData;
     private PackageLocalTableData localData;
+    public PackageLocalTableData LocalData => localData;
     private PackagePanel UIParent;
+    
 
     void Awake()
     {
@@ -23,11 +25,14 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
     private void InitUI()
     {
         UIIcon = UIItemIcon.GetComponent<Image>();
-        UISelect.gameObject.SetActive(false);
-        UIEquippedIcon.gameObject.SetActive(false);
+        
         animator.gameObject.SetActive(false);
     }
-
+/// <summary>
+/// 刷新物品格子
+/// </summary>
+/// <param name="localTableData"></param>
+/// <param name="packagePanel"></param>
     public void Refresh(PackageLocalTableData localTableData, PackagePanel packagePanel)
     {
         localData = localTableData;
@@ -39,19 +44,32 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
             #if UNITY_EDITOR
             Debug.Log($"获取该id物品失败");
             #endif
+            return;
         }
         UIIcon.sprite = tableData.itemIcon;
+        UISelect.gameObject.SetActive(false);
+        UIEquippedIcon.gameObject.SetActive(localData.isEquip);
         
         Text numText = UIItemNumText.GetComponent<Text>();
         numText.text = localData.itemCount.ToString();
         UIItemNumText.gameObject.SetActive(localData.itemCount >1); 
     }
 /// <summary>
+/// 刷新已装备图标
+/// </summary>
+    public void RefreshEquipState()
+    {
+        if(UIEquippedIcon != null && localData != null)
+        {
+            UIEquippedIcon.gameObject.SetActive(localData.isEquip);
+        }
+    }
+/// <summary>
 /// 刷新选中状态
 /// </summary>
     public void RefreshDelectState()
     {
-        if (UIParent.delectUID.Contains(localData.itemUID))
+        if (UIParent.DelectUID.Contains(localData.itemUID))
             {
                 UISelect.gameObject.SetActive(false);
             }
@@ -62,17 +80,32 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
     public void OnPointerClick(PointerEventData eventData)
     {
         GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseClick);
-        if(UIParent.currentPanelMode == PanelMode.delect)
+
+        if(eventData.button == PointerEventData.InputButton.Right ) //右键关闭详情面板
         {
-            UIParent.AddDelectUID(localData.itemUID);
-            if(UISelect.gameObject.activeSelf)
-            {
-                UISelect.gameObject.SetActive(false);
-            }else UISelect.gameObject.SetActive(true);
+            //isOpenItemDetailsPanel = false;
+            UIParent.CloseDetailPanel();
+            return;
         }
 
-        /* if(UIParent.ChooseUID == localData.itemUID) return;
-        UIParent.ChooseUID = localData.itemUID; */
+        if(UIParent.currentPanelMode == PanelMode.delect) //删除模式不打开详情面板
+        {
+            UIParent.AddDelectUID(localData.itemUID);
+
+            UISelect.gameObject.SetActive(!UISelect.gameObject.activeSelf);
+            return;
+            /* if(UISelect.gameObject.activeSelf)
+            {
+                UISelect.gameObject.SetActive(false);
+            }else UISelect.gameObject.SetActive(true); */
+        }
+
+        // if(UIParent.ChooseUID == localData.itemUID) return;
+        UIParent.ChooseUID = localData.itemUID; 
+
+        UIParent.OpenDetailPanel(); //打开详情界面
+        //isOpenItemDetailsPanel = true;
+
         #if UNITY_EDITOR
         Debug.Log($"选中该物品");
         #endif
