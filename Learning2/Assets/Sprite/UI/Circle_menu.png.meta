@@ -95,18 +95,128 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Circle_menu_0
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 148
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e3a03e156afcf34ca79bcfff1bc5a58
+      internalID: 785841971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Circle_menu_1
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 283
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abee9e6eb48e30941b9b73c42012ae89
+      internalID: -1072241978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Circle_menu_2
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 239
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b03b6d908fc0b4408b058dced2d9483
+      internalID: 2096800816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Circle_menu_3
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 187
+        width: 71
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c28dade0b0b2a4cbfe246af640fd8d
+      internalID: 400344731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Circle_menu_4
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 178
+        width: 67
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c84c3cdd1df68d34a8cb3a03eecfd8c9
+      internalID: -1259694999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 092410caffff38e4a93730224093cdfc
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Circle_menu_0: 785841971
+      Circle_menu_1: -1072241978
+      Circle_menu_2: 2096800816
+      Circle_menu_3: 400344731
+      Circle_menu_4: -1259694999
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

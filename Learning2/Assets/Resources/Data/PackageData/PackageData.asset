@@ -16,6 +16,7 @@ MonoBehaviour:
   - itemID: 0
     itemName: "\u957F\u5251"
     itemType: 0
+    equipType: 1
     itemDetails: "\u4E00\u628A\u666E\u901A\u7684\u957F\u5251"
     itemMaxStackSize: 1
     itemIcon: {fileID: 334707182, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -23,6 +24,7 @@ MonoBehaviour:
   - itemID: 1
     itemName: "\u7CBE\u81F4\u957F\u5251"
     itemType: 0
+    equipType: 1
     itemDetails: "\u4E00\u628A\u7CBE\u81F4\u7684\u957F\u5251"
     itemMaxStackSize: 1
     itemIcon: {fileID: -1245982222, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -30,6 +32,7 @@ MonoBehaviour:
   - itemID: 2
     itemName: "\u94BB\u77F3\u957F\u5251"
     itemType: 0
+    equipType: 1
     itemDetails: "\u4E00\u628A\u94BB\u77F3\u6253\u9020\u7684\u957F\u5251"
     itemMaxStackSize: 1
     itemIcon: {fileID: 1223566360, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -37,6 +40,7 @@ MonoBehaviour:
   - itemID: 3
     itemName: "\u5934\u76D4"
     itemType: 0
+    equipType: 3
     itemDetails: "\u666E\u901A\u5934\u76D4"
     itemMaxStackSize: 1
     itemIcon: {fileID: 658616108, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -44,6 +48,7 @@ MonoBehaviour:
   - itemID: 4
     itemName: "\u7CBE\u81F4\u5934\u76D4"
     itemType: 0
+    equipType: 3
     itemDetails: "\u770B\u8D77\u6765\u7ED3\u5B9E\u591A\u4E86"
     itemMaxStackSize: 1
     itemIcon: {fileID: 1443595082, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -51,6 +56,7 @@ MonoBehaviour:
   - itemID: 5
     itemName: "\u76D4\u7532"
     itemType: 0
+    equipType: 2
     itemDetails: "\u55EF\uFF0C\u5F88\u7ED3\u5B9E"
     itemMaxStackSize: 1
     itemIcon: {fileID: -1114275621, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -58,6 +64,7 @@ MonoBehaviour:
   - itemID: 6
     itemName: "\u6212\u6307"
     itemType: 0
+    equipType: 4
     itemDetails: "\u95EA\u95EA\u53D1\u5149\u7684\u6212\u6307"
     itemMaxStackSize: 1
     itemIcon: {fileID: 618247988, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -65,6 +72,7 @@ MonoBehaviour:
   - itemID: 7
     itemName: "\u9879\u94FE"
     itemType: 0
+    equipType: 5
     itemDetails: "\u95EA\u95EA\u53D1\u5149\u7684\u9879\u94FE"
     itemMaxStackSize: 1
     itemIcon: {fileID: 358180651, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -72,6 +80,7 @@ MonoBehaviour:
   - itemID: 8
     itemName: "\u978B\u5B50"
     itemType: 0
+    equipType: 6
     itemDetails: "\u770B\u8D77\u6765\uFF0C\u6709\u70B9\u81ED\uFF0C\u4E0D\u4F1A\u662F\u4E8C\u624B\u7684\u5427"
     itemMaxStackSize: 1
     itemIcon: {fileID: -1030446943, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -79,6 +88,7 @@ MonoBehaviour:
   - itemID: 9
     itemName: "\u7CBE\u81F4\u978B\u5B50"
     itemType: 0
+    equipType: 6
     itemDetails: "\u8FD8\u4E0D\u9519\u7684\u978B\u5B50"
     itemMaxStackSize: 1
     itemIcon: {fileID: -1053833771, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -86,6 +96,7 @@ MonoBehaviour:
   - itemID: 10
     itemName: "\u91D1\u952D"
     itemType: 3
+    equipType: 0
     itemDetails: "\u91D1\u8272\u7684"
     itemMaxStackSize: 99
     itemIcon: {fileID: -605971292, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -93,6 +104,7 @@ MonoBehaviour:
   - itemID: 11
     itemName: "\u94C1\u952D"
     itemType: 3
+    equipType: 0
     itemDetails: "\u94C1\u7684"
     itemMaxStackSize: 99
     itemIcon: {fileID: -1865304310, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -100,6 +112,7 @@ MonoBehaviour:
   - itemID: 12
     itemName: "\u6D77\u738B\u952D"
     itemType: 3
+    equipType: 0
     itemDetails: "\u6D77\u5E95\u7684\u795E\u79D8\u7D20\u6750\u953B\u9020\u800C\u6210"
     itemMaxStackSize: 99
     itemIcon: {fileID: 636573676, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -107,6 +120,7 @@ MonoBehaviour:
   - itemID: 13
     itemName: "\u94DC\u952D"
     itemType: 3
+    equipType: 0
     itemDetails: "\u94DC\u7684"
     itemMaxStackSize: 99
     itemIcon: {fileID: -332530065, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -114,6 +128,7 @@ MonoBehaviour:
   - itemID: 14
     itemName: "\u8840\u74F6"
     itemType: 2
+    equipType: 0
     itemDetails: "\u6551\u6211\u82DF\u547D"
     itemMaxStackSize: 10
     itemIcon: {fileID: -1134162310, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -121,6 +136,7 @@ MonoBehaviour:
   - itemID: 15
     itemName: "\u84DD\u74F6"
     itemType: 2
+    equipType: 0
     itemDetails: "\u5145\u6EE1\u629B\u74E6"
     itemMaxStackSize: 10
     itemIcon: {fileID: 261064016, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -128,6 +144,7 @@ MonoBehaviour:
   - itemID: 16
     itemName: "\u5927\u8840\u74F6"
     itemType: 2
+    equipType: 0
     itemDetails: "\u56DE\u8840plus"
     itemMaxStackSize: 10
     itemIcon: {fileID: 389271335, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -135,6 +152,7 @@ MonoBehaviour:
   - itemID: 17
     itemName: "\u5927\u84DD\u74F6"
     itemType: 2
+    equipType: 0
     itemDetails: "\u629B\u74E6plus"
     itemMaxStackSize: 10
     itemIcon: {fileID: -331279519, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}
@@ -142,6 +160,7 @@ MonoBehaviour:
   - itemID: 18
     itemName: "\u82F9\u679C"
     itemType: 1
+    equipType: 0
     itemDetails: "\u597D\u5403"
     itemMaxStackSize: 99
     itemIcon: {fileID: -1102244539, guid: b2cfd5b51a87b664eb6ebcb19b692dcc, type: 3}

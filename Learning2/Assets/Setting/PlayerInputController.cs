@@ -144,6 +144,15 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipPanel"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfff3e0c-c471-416e-87a7-b5ddf0ccf73a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -267,6 +276,17 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""action"": ""Bag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d25d9f39-0995-4b15-9ea5-84bd1293dda1"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipPanel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -284,9 +304,18 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CloseBag"",
+                    ""name"": ""ClosedBag"",
                     ""type"": ""Button"",
                     ""id"": ""6b55aee5-9b28-47d9-b3e8-b8fad0dd2fa9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseEquipPanel"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a72e3ab-f6c9-4b14-a4a4-16258f859e22"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -312,7 +341,18 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseBag"",
+                    ""action"": ""ClosedBag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70ad6dec-4a02-4ae2-9078-5193d98b99e5"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseEquipPanel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -329,10 +369,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         m_Game_Confirm = m_Game.FindAction("Confirm", throwIfNotFound: true);
         m_Game_ESC = m_Game.FindAction("ESC", throwIfNotFound: true);
         m_Game_Bag = m_Game.FindAction("Bag", throwIfNotFound: true);
+        m_Game_EquipPanel = m_Game.FindAction("EquipPanel", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_ESC = m_UI.FindAction("ESC", throwIfNotFound: true);
-        m_UI_CloseBag = m_UI.FindAction("CloseBag", throwIfNotFound: true);
+        m_UI_ClosedBag = m_UI.FindAction("ClosedBag", throwIfNotFound: true);
+        m_UI_CloseEquipPanel = m_UI.FindAction("CloseEquipPanel", throwIfNotFound: true);
     }
 
     ~@PlayerInputController()
@@ -420,6 +462,7 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     private readonly InputAction m_Game_Confirm;
     private readonly InputAction m_Game_ESC;
     private readonly InputAction m_Game_Bag;
+    private readonly InputAction m_Game_EquipPanel;
     /// <summary>
     /// Provides access to input actions defined in input action map "Game".
     /// </summary>
@@ -455,6 +498,10 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// Provides access to the underlying input action "Game/Bag".
         /// </summary>
         public InputAction @Bag => m_Wrapper.m_Game_Bag;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/EquipPanel".
+        /// </summary>
+        public InputAction @EquipPanel => m_Wrapper.m_Game_EquipPanel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -499,6 +546,9 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Bag.started += instance.OnBag;
             @Bag.performed += instance.OnBag;
             @Bag.canceled += instance.OnBag;
+            @EquipPanel.started += instance.OnEquipPanel;
+            @EquipPanel.performed += instance.OnEquipPanel;
+            @EquipPanel.canceled += instance.OnEquipPanel;
         }
 
         /// <summary>
@@ -528,6 +578,9 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @Bag.started -= instance.OnBag;
             @Bag.performed -= instance.OnBag;
             @Bag.canceled -= instance.OnBag;
+            @EquipPanel.started -= instance.OnEquipPanel;
+            @EquipPanel.performed -= instance.OnEquipPanel;
+            @EquipPanel.canceled -= instance.OnEquipPanel;
         }
 
         /// <summary>
@@ -566,7 +619,8 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_ESC;
-    private readonly InputAction m_UI_CloseBag;
+    private readonly InputAction m_UI_ClosedBag;
+    private readonly InputAction m_UI_CloseEquipPanel;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -583,9 +637,13 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// </summary>
         public InputAction @ESC => m_Wrapper.m_UI_ESC;
         /// <summary>
-        /// Provides access to the underlying input action "UI/CloseBag".
+        /// Provides access to the underlying input action "UI/ClosedBag".
         /// </summary>
-        public InputAction @CloseBag => m_Wrapper.m_UI_CloseBag;
+        public InputAction @ClosedBag => m_Wrapper.m_UI_ClosedBag;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/CloseEquipPanel".
+        /// </summary>
+        public InputAction @CloseEquipPanel => m_Wrapper.m_UI_CloseEquipPanel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -615,9 +673,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @ESC.started += instance.OnESC;
             @ESC.performed += instance.OnESC;
             @ESC.canceled += instance.OnESC;
-            @CloseBag.started += instance.OnCloseBag;
-            @CloseBag.performed += instance.OnCloseBag;
-            @CloseBag.canceled += instance.OnCloseBag;
+            @ClosedBag.started += instance.OnClosedBag;
+            @ClosedBag.performed += instance.OnClosedBag;
+            @ClosedBag.canceled += instance.OnClosedBag;
+            @CloseEquipPanel.started += instance.OnCloseEquipPanel;
+            @CloseEquipPanel.performed += instance.OnCloseEquipPanel;
+            @CloseEquipPanel.canceled += instance.OnCloseEquipPanel;
         }
 
         /// <summary>
@@ -632,9 +693,12 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
             @ESC.started -= instance.OnESC;
             @ESC.performed -= instance.OnESC;
             @ESC.canceled -= instance.OnESC;
-            @CloseBag.started -= instance.OnCloseBag;
-            @CloseBag.performed -= instance.OnCloseBag;
-            @CloseBag.canceled -= instance.OnCloseBag;
+            @ClosedBag.started -= instance.OnClosedBag;
+            @ClosedBag.performed -= instance.OnClosedBag;
+            @ClosedBag.canceled -= instance.OnClosedBag;
+            @CloseEquipPanel.started -= instance.OnCloseEquipPanel;
+            @CloseEquipPanel.performed -= instance.OnCloseEquipPanel;
+            @CloseEquipPanel.canceled -= instance.OnCloseEquipPanel;
         }
 
         /// <summary>
@@ -717,6 +781,13 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnBag(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquipPanel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquipPanel(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -733,11 +804,18 @@ public partial class @PlayerInputController: IInputActionCollection2, IDisposabl
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnESC(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "CloseBag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ClosedBag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCloseBag(InputAction.CallbackContext context);
+        void OnClosedBag(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CloseEquipPanel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCloseEquipPanel(InputAction.CallbackContext context);
     }
 }

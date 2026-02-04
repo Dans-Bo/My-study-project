@@ -1,27 +1,27 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Animation))]
-public class LootCellPanel : MonoBehaviour,IPointerClickHandler
+[RequireComponent(typeof(Animator))]
+public class LootCellPanel : MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
 {
-    [SerializeField] private Text UINumText;
+    [SerializeField] private TextMeshProUGUI UINumText;
     [SerializeField] private Transform UIItemIcon;
     //[SerializeField] private GameObject UIConfirmPanelPrefab;
      //private RectTransform prefabTrans;
-    [SerializeField] private Canvas UICanvas;
+    private Canvas UICanvas;
     private Image icon;
-    private Animation anim;
+    [SerializeField] private Animator anim;
 
     private PackageLocalTableData localData;
     private PackageTableData tableData;
     private LootBoxPanel UIParent;
-    private bool isOpenConfirmPanel = false;
 
     void Awake()
     {
-        anim = GetComponent<Animation>();
+        anim.gameObject.SetActive(false);
         icon = UIItemIcon.GetComponent<Image>();
 
         if(UICanvas == null) UICanvas = GetComponentInParent<Canvas>();
@@ -31,42 +31,56 @@ public class LootCellPanel : MonoBehaviour,IPointerClickHandler
     {
         localData = localTableData;
         UIParent = lootBoxPanel;
-        tableData = LootsManager.Instances.GetTableDataByID(localData.itemID);
+        tableData = LootsManager.Instance.GetTableDataByID(localData.itemID);
 
-        if(tableData == null) Debug.LogError("获取战利品物品失败");
+        if(tableData == null)
+        {
+            Debug.LogError("获取战利品物品失败");
+            return;
+        } 
         
         icon.sprite = tableData.itemIcon;
         UINumText.text = localData.itemCount.ToString();
         UINumText.gameObject.SetActive(localData.itemCount >1);
 
+        gameObject.SetActive(true);
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        LootsConfirmPanel confirmPanel = LootsConfirmPanel.Instance;
-        if(confirmPanel == null) return;
-
         if(eventData.button == PointerEventData.InputButton.Left)
         {
-            if(isOpenConfirmPanel)
-            {
-                isOpenConfirmPanel = false;
-                LootsConfirmPanel.Instance?.gameObject.SetActive(false);
-                Debug.Log("左键关闭确认面板");
-                return;
-            }
-            
-            isOpenConfirmPanel = true;
-            LootsConfirmPanel.Instance?.gameObject.SetActive(true);
-            Vector2 mousePos = Mouse.current.position.ReadValue();
-            confirmPanel.SetPanelPos(UICanvas.transform as RectTransform,mousePos);
-            
+            GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseSlide);
+
+            UIParent.OpenConfirmPanel();
+            UIParent.ChooseUid = localData.itemUID;
+            return;
         }
 
-        if(eventData.button == PointerEventData.InputButton.Right && isOpenConfirmPanel)
+        if(eventData.button == PointerEventData.InputButton.Right)
         {
-            LootsConfirmPanel.Instance?.gameObject.SetActive(false);
+            UIParent.CloseConfirmPanel();
+            return;
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        anim.gameObject.SetActive(true);
+        anim.SetTrigger("in");
+        GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseSlide);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        anim.gameObject.SetActive(true);
+        anim.SetTrigger("out");
+        Invoke("CloseAnimObj",0.3f);
+    }
+
+    private void CloseAnimObj()
+    {
+        if(anim != null) anim.gameObject.SetActive(false);
+    }
 }

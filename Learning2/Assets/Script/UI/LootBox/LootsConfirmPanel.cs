@@ -8,42 +8,16 @@ public class LootsConfirmPanel:MonoBehaviour
 {
     [SerializeField] private Button UIConfirm;
     [SerializeField] private Button UIClose;
-
-    private static LootsConfirmPanel instance;
-    public static LootsConfirmPanel Instance
-    {
-        get
-        {
-            if(instance == null)
-            {
-                GameObject panelPrefab = Resources.Load<GameObject>("Prefabs/UI/LootBox/BoxConfirmPanel");
-                if(panelPrefab == null)
-                {
-                    Debug.LogError("未找到预制件，检查路径");
-                    return null;
-                }
-
-                GameObject obj = GameObject.Instantiate(panelPrefab);
-                instance = obj.GetComponent<LootsConfirmPanel>();
-
-                Canvas canvas = FindAnyObjectByType<Canvas>(); 
-                if(canvas != null) obj.transform.SetParent(canvas.transform,false);//设置父物体为Canvas
-
-                obj.SetActive(false);
-            }
-            return instance;
-        }
-    }
-    
+    private LootBoxPanel UIParent; 
 
     void Awake()
     {
-        if(instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
         InitClick();
+        this.gameObject.SetActive(false);
+    }
+    void Start()
+    {
+        UIParent = GetComponentInParent<LootBoxPanel>();
     }
 
     private void InitClick()
@@ -52,10 +26,16 @@ public class LootsConfirmPanel:MonoBehaviour
         UIClose.onClick.AddListener(OnClose);
     }
 
-    private void OnClose() => instance.gameObject.SetActive(false);
+    private void OnClose() => this.gameObject.SetActive(false);
 
     private void OnConfirm()
     {
+        var loot = UIParent.PackageGetLoot();
+        PackageDataManage.Instance.AddItem(loot);
+        UIParent.RemoveLoot();
+        this.gameObject.SetActive(false);
+
+        
         Debug.Log("放入背包");
     }
 /// <summary>
@@ -65,15 +45,15 @@ public class LootsConfirmPanel:MonoBehaviour
 /// <param name="mouseScreenPos"></param>
     public void SetPanelPos(RectTransform canvasRect, Vector2 mouseScreenPos)
     {
+        Camera canvasCamera = canvasRect.GetComponent<Canvas>().worldCamera;
         if(RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
             mouseScreenPos,
-            null,
+            canvasCamera,
             out Vector2 localPoint
         ))
         {
             (transform as RectTransform).localPosition = localPoint;
         }
     }
-
 }

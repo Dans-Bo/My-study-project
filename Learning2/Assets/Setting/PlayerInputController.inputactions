@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EquipPanel",
+                    "type": "Button",
+                    "id": "cfff3e0c-c471-416e-87a7-b5ddf0ccf73a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -181,6 +190,17 @@
                     "action": "Bag",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d25d9f39-0995-4b15-9ea5-84bd1293dda1",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -198,9 +218,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CloseBag",
+                    "name": "ClosedBag",
                     "type": "Button",
                     "id": "6b55aee5-9b28-47d9-b3e8-b8fad0dd2fa9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseEquipPanel",
+                    "type": "Button",
+                    "id": "3a72e3ab-f6c9-4b14-a4a4-16258f859e22",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -226,7 +255,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseBag",
+                    "action": "ClosedBag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70ad6dec-4a02-4ae2-9078-5193d98b99e5",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseEquipPanel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
