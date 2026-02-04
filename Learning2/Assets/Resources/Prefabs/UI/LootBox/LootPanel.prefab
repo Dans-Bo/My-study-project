@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 611840012650633928, guid: 41b5fb2994395204cbd0f627ab5e6f87, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -31.7
+      value: -27.442
       objectReference: {fileID: 0}
     - target: {fileID: 611840012650633928, guid: 41b5fb2994395204cbd0f627ab5e6f87, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 23.6
+      value: -11.8
       objectReference: {fileID: 0}
     - target: {fileID: 837960267624331806, guid: 41b5fb2994395204cbd0f627ab5e6f87, type: 3}
       propertyPath: UISelect
@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LootPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8068366490920296638, guid: 41b5fb2994395204cbd0f627ab5e6f87, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 90e36633adb308f4f8f888124a2ef944, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1528939940001925180, guid: 41b5fb2994395204cbd0f627ab5e6f87, type: 3}
@@ -156,8 +160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UINumText: {fileID: 7743543539391257325}
   UIItemIcon: {fileID: 6744021266609995600}
-  UIConfirmPanelPrefab: {fileID: 4031045771283642397, guid: dae8c062e40a16c4a9b1c94b81d6df55, type: 3}
-  prefabTrans: {fileID: 0}
   UICanvas: {fileID: 0}
 --- !u!111 &585014771291437415
 Animation:
