@@ -8,18 +8,18 @@ using UnityEngine;
 /// </summary>
 public class StateMachine : MonoBehaviour
 {
-    IState currentState;
+    protected IState currentState;
 
     protected Dictionary<System.Type, IState> stateTable;
 
-    void Update()
+    protected virtual void Update()
     {
         currentState.Update();
     }
 
-    void FixedUpdate()
+    protected virtual void  FixedUpdate()
     {
-        currentState.FixedUpadte();
+        currentState.FixedUpdate();
     }
     /// <summary>
     /// 状态启动
@@ -35,25 +35,18 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     public void SwitchState(IState newState)
     {
-        currentState.Exit();
-        SwitchOn(newState);
-    }
-    public void SwitchState(System.Type newStateType)
-    {
+        if (currentState == newState) return;
         
-        SwitchState(stateTable[newStateType]);
-    }
-
-    /*
-    public void SwitchState(IState newState)
-    {
         if(currentState != null)
         {
             currentState.Exit();
         }
 
-        currentState = newState;
-        currentState.Enter();
+        SwitchOn(newState);
     }
-    */
+    public void SwitchState(System.Type newStateType)
+    {
+        SwitchState(stateTable[newStateType]);
+    }
+
 }

@@ -9,7 +9,7 @@ public interface IState
 {
     void Enter();
     void Update();
-    void FixedUpadte();
+    void FixedUpdate();
     void Exit();
 
 } 

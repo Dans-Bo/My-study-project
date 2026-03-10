@@ -54,7 +54,7 @@ public class PackageTest
     [MenuItem("GMCmd/背包/打开背包")]
     public static void OpenPackagePanel()
     {
-        UIManager.Instance.OpenPanel(ConstUIName.packagePanel);
+        UIManager.Instance.OpenPanel(ConstUIName.PACKAGEPANEL);
     }
 
     [MenuItem("GMCmd/背包/清空背包")]
@@ -76,7 +76,7 @@ public class PackageTest
     [MenuItem("GMCmd/打开音量设置")]
     public static void OpenAudioPanel()
     {
-        UIManager.Instance.OpenPanel(ConstUIName.audioPanel);
+        UIManager.Instance.OpenPanel(ConstUIName.AUDIOPANEL);
     }
     [MenuItem("GMCmd/背包/清除打开面板缓存")]
     public static void ClearOpenpanel()

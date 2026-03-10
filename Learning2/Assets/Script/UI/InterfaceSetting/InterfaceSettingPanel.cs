@@ -77,7 +77,7 @@ public class InterfaceSettingPanel : BasePanel
     {
         IsChange();
         UIManager.Instance.CloseCurrentActivePanel();
-        UIManager.Instance.OpenPanel(ConstUIName.homePanel);
+        UIManager.Instance.OpenPanel(ConstUIName.HOMEPANEL);
     }
 
     private void OnClose()

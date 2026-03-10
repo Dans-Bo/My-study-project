@@ -30,17 +30,33 @@ public class ItemDetailsPanal : MonoBehaviour
     private PackageLocalTableData localData;
     private PackagePanel UIParent;
     private EquipmentPanel equipmentParent;
+    private PlayerEquipmentManager equipmentManager;
 
 
 
     void Awake()
     {
         InitUIClick();
+        GetPlayerComponent();
+        
+    }
+
+    private void GetPlayerComponent()
+    {
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if(playerObj != null && playerObj.TryGetComponent<PlayerEquipmentManager>( out equipmentManager))
+        {
+            Debug.Log($"获取角色装备管理器PlayerEquipmentManager成功");
+        }
+        else
+        {
+            Debug.LogError($"未找到Player对象或者Player上为挂载角色装备管理器PlayerEquipmentManager");
+        }
     }
 
     public void Refresh(PackageLocalTableData localTableData, PackagePanel packagePanel)
     {
-        tableData = PackageDataManage.Instance.GetPackageItem_ByID(localTableData.itemID);
+        tableData = PackageDataManage.Instance.GetPackageTableData_ByID(localTableData.itemID);
         localData = localTableData;
         UIParent = packagePanel;
 
@@ -73,7 +89,7 @@ public class ItemDetailsPanal : MonoBehaviour
     }
     public void Refresh(PackageLocalTableData localTableData, EquipmentPanel equipmentPanel)
     {
-        tableData = PackageDataManage.Instance.GetPackageItem_ByID(localTableData.itemID);
+        tableData = PackageDataManage.Instance.GetPackageTableData_ByID(localTableData.itemID);
         localData = localTableData;
         equipmentParent = equipmentPanel;
 
@@ -94,7 +110,11 @@ public class ItemDetailsPanal : MonoBehaviour
         uiMaxMp_Num.transform.parent.gameObject.SetActive(isEquipment);
         uiLevelNum.transform.parent.gameObject.SetActive(isEquipment);
 
-        uiEquiButtonText.text = "卸载";
+        if(localData.isEquip == true)
+        {
+            uiEquiButtonText.text = "卸载";
+        }
+       
     }
 
 /// <summary>
@@ -163,11 +183,11 @@ public class ItemDetailsPanal : MonoBehaviour
 
     void InitUIClick()
     {
-        uiEquiButton.onClick.AddListener(OnEquip);
-        uiDeleteButton.onClick.AddListener(OnDelete);
+        uiEquiButton.onClick.AddListener(OnClickEquip);
+        uiDeleteButton.onClick.AddListener(OnClickDelete);
     }
 
-    private void OnDelete()
+    private void OnClickDelete()
     {   
         if(UIParent != null)
         {
@@ -179,22 +199,17 @@ public class ItemDetailsPanal : MonoBehaviour
 
         if(equipmentParent != null)
         {
+            equipmentManager.Unequip(tableData.equipType);
             Debug.Log("卸载");
         }
+
+        
         
     }
     //TODO 获取item的isequip，显示已装备图标
-    private void OnEquip()
+    private void OnClickEquip()
     {
-        if(UIParent != null)
-        {
-            UIParent.EquipItem();
-            Debug.Log("装备");
-        }
-
-        if(equipmentParent != null)
-        {
-            Debug.Log($"卸载");
-        }
+        equipmentManager.Equip(localData);
+        Debug.Log($"已装备");
     }
 }

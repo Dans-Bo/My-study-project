@@ -1,6 +1,8 @@
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using JetBrains.Annotations;
+using System.Collections;
 
 public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
 {
@@ -37,7 +39,7 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
     {
         localData = localTableData;
         UIParent = packagePanel;
-        tableData = PackageDataManage.Instance.GetPackageItem_ByID(localData.itemID);
+        tableData = PackageDataManage.Instance.GetPackageTableData_ByID(localData.itemID);
 
         if(tableData == null)
         {
@@ -116,13 +118,26 @@ public class PackageCell: MonoBehaviour,IPointerClickHandler,IPointerEnterHandle
         animator.gameObject.SetActive(true);
         animator.GetComponent<Animator>().SetTrigger("in");
         GameManage.Instance.audioManage.PlaySFX(AudioType.SFX_MouseSlide);
+        StartCoroutine(DisableAnimatorObj(0.5f));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         animator.gameObject.SetActive(true);
         animator.GetComponent<Animator>().SetTrigger("out");
+        StartCoroutine(DisableAnimatorObj(0.5f));
     }
 
     #endregion
+
+    /// <summary>
+    /// 协程延迟关闭动画gameobject  
+    /// </summary>
+    /// <param name="delay">延迟的时间</param>
+    /// <returns></returns>
+    private IEnumerator DisableAnimatorObj(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        animator.gameObject.SetActive(false);
+    }
 }

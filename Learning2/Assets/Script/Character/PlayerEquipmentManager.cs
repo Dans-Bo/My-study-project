@@ -39,7 +39,7 @@ public class PlayerEquipmentManager : MonoBehaviour
     {
         if(item == null) return false;
 
-        PackageTableData tableData = PackageDataManage.Instance.GetPackageItem_ByID(item.itemID);
+        PackageTableData tableData = PackageDataManage.Instance.GetPackageTableData_ByID(item.itemID);
         if(tableData == null || tableData.itemType != ItemType.equipment)
         {
             Debug.LogWarning("非装备物品无法装备或数据不存在");

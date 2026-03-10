@@ -21,8 +21,8 @@ public class PackageDataManage
 
     private PackageDataManage()
     {
-        UpdateCachedPackageData();
         GetPackageData();
+        UpdateCachedPackageData();
 
 //静态字典存储
 /*         itemIdDataDic = new();
@@ -37,6 +37,7 @@ public class PackageDataManage
 
     public PackageTable PackageTable{ get;private set; } //静态信息
     public List<PackageLocalTableData> CachedPackageData{ get;private set;} //背包物品缓存池
+    public List<PackageLocalTableData> EquipItems{get;private set;} //装备物品，提供给装备背包
 
 //TODO 物品数量多时，使用字典优化查找效率
    /*  private Dictionary<int,PackageTableData> itemIdDataDic; // ID - 静态数据
@@ -48,6 +49,8 @@ public class PackageDataManage
     public void UpdateCachedPackageData()
     {
         CachedPackageData = PackageLocalTable.Instance.LocalTables;
+        UpdateEquipItemsData();
+        Debug.Log($"更新角色背包物品数据");
 
         /* itemUidDataDic = new();
         foreach(var data in CachedPackageData)
@@ -57,6 +60,14 @@ public class PackageDataManage
                 itemUidDataDic.Add(data.itemUID,data);
             }
         } */
+    }
+/// <summary>
+/// 更新装备类型的物品
+/// </summary>
+    public void UpdateEquipItemsData()
+    {
+        EquipItems = GetPackageItem_ByType(ItemType.equipment);
+        Debug.Log($"更新装备物品数据");
     }
 /// <summary>
 /// 获取背包静态数据
@@ -78,7 +89,7 @@ public class PackageDataManage
 /// </summary>
 /// <param name="id"></param>
 /// <returns></returns>
-    public PackageTableData GetPackageItem_ByID(int id)
+    public PackageTableData GetPackageTableData_ByID(int id)
     {
        /*  itemIdDataDic.TryGetValue(id, out var data);
         return data; */
@@ -95,7 +106,7 @@ public class PackageDataManage
 /// </summary>
 /// <param name="uid"></param>
 /// <returns></returns>
-    public PackageLocalTableData GetPackageItem_ByUID(string uid)
+    public PackageLocalTableData GetPackageLocalData_ByUID(string uid)
     {
         /* itemUidDataDic.TryGetValue(uid,out var data);
         return data; */
@@ -112,14 +123,14 @@ public class PackageDataManage
 /// </summary>
 /// <param name="type"></param>
 /// <returns></returns>
-    public List<PackageTableData> GetPackageItem_ByType(ItemType type)
+    public List<PackageLocalTableData> GetPackageItem_ByType(ItemType type)
     {
-        var tableItem = new List<PackageTableData>();
-        var items = PackageTable.packageTableDatas;
+        var tableItem = new List<PackageLocalTableData>();
 
-        foreach(var item in items)
+        foreach(var item in CachedPackageData)
         {
-            if(item.itemType == type) tableItem.Add(item);
+            var targetItem = GetPackageTableData_ByID(item.itemID);
+            if(targetItem.itemType == type) tableItem.Add(item);
         }
         return tableItem;
     }
@@ -129,7 +140,7 @@ public class PackageDataManage
 /// <param name="uid"></param>
     public void DelectItem(string uid )
     {
-        PackageLocalTableData data = GetPackageItem_ByUID(uid);
+        PackageLocalTableData data = GetPackageLocalData_ByUID(uid);
         if(data == null) return;
         //减少数量，若为0，则删除，剩余仅保存
         data.itemCount --;
@@ -149,7 +160,7 @@ public class PackageDataManage
     {
         foreach(string uid in uids)
         {
-            PackageLocalTableData data = GetPackageItem_ByUID(uid);
+            PackageLocalTableData data = GetPackageLocalData_ByUID(uid);
             if(data == null)
             {
                 Debug.LogWarning($"删除失败，未找到UID为【{uid}】的物品");
@@ -171,7 +182,7 @@ public class PackageDataManage
 /// <param name="uid"></param>
     public void DeleteItem_Whole(string uid)
     {
-        PackageLocalTableData data = GetPackageItem_ByUID(uid);
+        PackageLocalTableData data = GetPackageLocalData_ByUID(uid);
         if(data == null) return;
         _ = PackageLocalTable.Instance.RemoveItem(uid,true);
         UpdateCachedPackageData();
@@ -183,7 +194,7 @@ public class PackageDataManage
 /// <param name="count"></param>
     public void AddItem(int itemID, int count = 1)
     {
-        PackageTableData tableData = GetPackageItem_ByID(itemID);
+        PackageTableData tableData = GetPackageTableData_ByID(itemID);
         if(tableData == null) return;
 
         //查找同ID且可堆叠的现有物品
@@ -229,7 +240,7 @@ public class PackageDataManage
     {
         if(item == null) return;
         if(item.itemCount <0) return;
-        PackageTableData tableData = GetPackageItem_ByID(item.itemID);
+        PackageTableData tableData = GetPackageTableData_ByID(item.itemID);
         if(tableData == null)
         {
             Debug.LogWarning($"放入背包失败，物品ID{item.itemID}不存在");
@@ -300,7 +311,7 @@ public class PackageDataManage
         foreach(var item in itemList )
         {
             if (item == null || item.itemCount <= 0) continue;
-            tableData = GetPackageItem_ByID(item.itemID);
+            tableData = GetPackageTableData_ByID(item.itemID);
             if(tableData == null)
             {
                 Debug.LogWarning($"ID为{item.itemID}的物品不存在，跳过该物品");

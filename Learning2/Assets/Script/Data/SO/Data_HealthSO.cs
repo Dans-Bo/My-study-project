@@ -6,11 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Health", menuName = "Data/Data_Health" )]
 public class Data_HealthSO : ScriptableObject 
 {
-    [Header("血量")]
-    public float maxHealth;
-    public float currentHealth;
-
-
     [Header("无敌时间")]
     public float invulnerableDuration;
     public bool isInvulnerable;

@@ -108,11 +108,13 @@ public class PlayerAttributeManager : MonoBehaviour
             case PlayerAttribute.Level:
             case PlayerAttribute.Exp:
             case PlayerAttribute.MaxExp:
-                newValue = Mathf.Max(newValue,0); //等级经验不为负
+            case PlayerAttribute.Defense:
+                newValue = Mathf.Max(newValue,0); //不为负
                 break;
+            
         }
 
-        if(Mathf.Abs(newValue - oldValue) > 0.0001f)  //属性变化，更新属性并触发事件
+        if(newValue != oldValue)  //属性变化，更新属性并触发事件
         {
             currentAttribute[attrType] = newValue;
             OnAttributeChange?.Invoke(attrType,newValue);

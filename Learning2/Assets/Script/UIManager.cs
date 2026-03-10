@@ -10,12 +10,12 @@ using UnityEngine.UI;
 /// </summary>
 public class ConstUIName
 {
-    public const string packagePanel = "PackagePanel";
-    public const string audioPanel = "AudioPanel";
-    public const string interfaceSettingPanel = "InterfaceSettingPanel";
-    public const string homePanel = "HomePanel";
-    public const string lootsBoxPanel = "LootsBoxPanel";
-    public const string equipmentPanel = "EquipmentPanel";
+    public const string PACKAGEPANEL = "Packagepanel";
+    public const string AUDIOPANEL = "AudioPanel";
+    public const string INTERFACESETTINGPANEL = "InterfaceSettingPanel";
+    public const string HOMEPANEL = "HomePanel";
+    public const string LOOTSBOXPANEL = "LootsBoxPanel";
+    public const string EQUIPMENTPANEL = "EquipmentPanel";
 }
 
 public class UIManager
@@ -108,12 +108,12 @@ public class UIManager
         CurrentActivePanel = string.Empty;
         prefabPathDic = new Dictionary<string, string>()
         {
-            {ConstUIName.packagePanel, "Package/PackagePanel"},
-            {ConstUIName.audioPanel,"AudioSetting/AudioPanel"},
-            {ConstUIName.interfaceSettingPanel,"InterfaceSetting/InterfaceSettingPanel"},
-            {ConstUIName.homePanel,"HomePanel"},
-            {ConstUIName.lootsBoxPanel, "LootBox/BoxPanel"},
-            {ConstUIName.equipmentPanel,"Equipment/EquipmentPanel"},
+            {ConstUIName.PACKAGEPANEL, "Package/PACKAGEPANEL"},
+            {ConstUIName.AUDIOPANEL,"AudioSetting/AudioPanel"},
+            {ConstUIName.INTERFACESETTINGPANEL,"InterfaceSetting/InterfaceSettingPanel"},
+            {ConstUIName.HOMEPANEL,"HomePanel"},
+            {ConstUIName.LOOTSBOXPANEL, "LootBox/BoxPanel"},
+            {ConstUIName.EQUIPMENTPANEL,"Equipment/EquipmentPanel"},
         };
     }
 /// <summary>

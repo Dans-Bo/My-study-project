@@ -26,7 +26,7 @@ public class PackagePanel : BasePanel,IPointerClickHandler
     private ItemType[] typeSwitch = {ItemType.equipment,ItemType.food,ItemType.potion,ItemType.material}; //页面切换，用于上一页，下一页
     private int currentTypeIndex; //当前背包物品类型的index，用于上下页切换
     private ItemType currentPanelItemType; //当前背包物品类型，
-    [SerializeField]private GameObject cellPrefab; 
+    [SerializeField]private GameObject cellPrefab;  //格子预制件
     private List<PackageCell> cellPool = new List<PackageCell>(); //背包格子对象池
     private Dictionary<string, PackageCell> uidToCell = new();  // uid与背包格子的映射，查找对应物品的格子
     public List<string> DelectUID{get;private set;} = new List<string>(); //记录删除模式下选中的物品
@@ -231,20 +231,21 @@ public class PackagePanel : BasePanel,IPointerClickHandler
         }
         RectTransform scrollContent = scrollRect.content;
 
-        //把所有复用格子放回对象池
+        //把所有复用格子放回对象池(隐藏)
         foreach(var cell in cellPool)  
         {
             cell.gameObject.SetActive(false);
         }
 
         List<PackageLocalTableData> items = PackageDataManage.Instance.CachedPackageData;
+        
         if(items == null || items.Count == 0) return;
         uidToCell.Clear(); //清除uid与背包格子的映射
 
         int cellIndex = 0; //格子索引
         foreach(var localItem in items)
         {
-            PackageTableData data = PackageDataManage.Instance.GetPackageItem_ByID(localItem.itemID);
+            PackageTableData data = PackageDataManage.Instance.GetPackageTableData_ByID(localItem.itemID);
             if(data == null || data.itemType != currentPanelItemType) continue;
 
             PackageCell cell;
@@ -266,7 +267,7 @@ public class PackagePanel : BasePanel,IPointerClickHandler
                 cellPool.Add(cell); //加入对象池
             }
 
-            cell.Refresh(localItem,this);
+            cell.Refresh(localItem,this); //刷新背包格子
 
             //添加映射
             if(!string.IsNullOrEmpty(localItem.itemUID))
@@ -474,7 +475,7 @@ public class PackagePanel : BasePanel,IPointerClickHandler
 
         uiItemDetailsPanel.SetActive(true);
         
-        PackageLocalTableData localTable = PackageDataManage.Instance.GetPackageItem_ByUID(_chooseUID);
+        PackageLocalTableData localTable = PackageDataManage.Instance.GetPackageLocalData_ByUID(_chooseUID);
         if(localTable == null) return;
 
         if(!uiItemDetailsPanel.TryGetComponent<ItemDetailsPanal>(out var itemDetails)) return;
@@ -546,7 +547,7 @@ public class PackagePanel : BasePanel,IPointerClickHandler
             return false;
         }
 
-        PackageLocalTableData targetItem = PackageDataManage.Instance.GetPackageItem_ByUID(itemUID);
+        PackageLocalTableData targetItem = PackageDataManage.Instance.GetPackageLocalData_ByUID(itemUID);
         equipmentManager.Equip(targetItem);
         return true;
 

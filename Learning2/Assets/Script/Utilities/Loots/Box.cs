@@ -28,7 +28,7 @@ public class Box : MonoBehaviour,IInteractable
         {
             OpenBox();
         }
-        UIManager.Instance.OpenPanel(ConstUIName.lootsBoxPanel);
+        UIManager.Instance.OpenPanel(ConstUIName.LOOTSBOXPANEL);
     }
 
     private void OpenBox()

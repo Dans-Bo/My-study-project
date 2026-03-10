@@ -36,7 +36,7 @@ public class HomePanel : BasePanel
     private void OnAudio()
     {
         UIManager.Instance.CloseCurrentActivePanel();
-        UIManager.Instance.OpenPanel(ConstUIName.audioPanel);
+        UIManager.Instance.OpenPanel(ConstUIName.AUDIOPANEL);
     }
 /// <summary>
 /// 界面设置
@@ -44,7 +44,7 @@ public class HomePanel : BasePanel
     private void OnInterface()
     {
         UIManager.Instance.CloseCurrentActivePanel();
-        UIManager.Instance.OpenPanel(ConstUIName.interfaceSettingPanel);
+        UIManager.Instance.OpenPanel(ConstUIName.INTERFACESETTINGPANEL);
     }
 /// <summary>
 /// 保存游戏

@@ -60,7 +60,7 @@ public class AudioPanel : BasePanel,IBeginDragHandler,IDragHandler,IEndDragHandl
 
     private void OnClickHome()
     {
-        UIManager.Instance.OpenPanel(ConstUIName.homePanel);
+        UIManager.Instance.OpenPanel(ConstUIName.HOMEPANEL);
         ClosePanel();
     }
 

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamge: 15
   currentAttackPower: 15
+  attackStage: 3

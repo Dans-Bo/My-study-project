@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class EquipmentPanel : BasePanel
+public class EquipmentPanel : BasePanel,IPointerClickHandler
 {
     [Header("关闭按钮")]
     [SerializeField] private Button uiCloseButton;
@@ -33,20 +34,26 @@ public class EquipmentPanel : BasePanel
     [SerializeField] private TextMeshProUGUI uiExpText;
     [SerializeField] private TextMeshProUGUI uiLevelText;
     [Header("装备背包按钮")]
-    [SerializeField] private Button EquipBagButton;
+    [SerializeField] private Button uiOpenEquipBag;
+    [SerializeField] private Button uiCloseEquipBag;
     
-
+    [Header("装备管理组件")]
     [SerializeField] private PlayerEquipmentManager equipmentManager;
+    [Header("属性管理组件")]
     [SerializeField] private PlayerAttributeManager attrManager;
+    [Header("物品详情预制件")]
     [SerializeField] private GameObject itemDetailsPanelPrefab;
+    [Header("装备背包预制件")]
+    [SerializeField] private GameObject equipBagPrefab;
     private ItemDetailsPanal itemDetails;
     private Canvas panelCanvas;
-
+    private Animator animator;
+    private bool isOpenEquipBag = false;
 
     protected override void  Awake()
     {
         InitClick();
-        itemDetailsPanelPrefab.SetActive(false);
+        
         //刷新图标
         if(equipmentManager == null)
         {
@@ -60,6 +67,12 @@ public class EquipmentPanel : BasePanel
             attrManager = obj.GetComponent<PlayerAttributeManager>();
         }
         Refresh();
+
+        animator = GetComponent<Animator>();
+
+        uiCloseButton.gameObject.SetActive(false);
+        equipBagPrefab.SetActive(false);
+        itemDetailsPanelPrefab.SetActive(false);
     }
 
     void Start()
@@ -90,7 +103,7 @@ public class EquipmentPanel : BasePanel
 
     private void OnUnequip(EquipmentType type, PackageLocalTableData data)
     {
-        PackageTableData tableData = PackageDataManage.Instance.GetPackageItem_ByID(data.itemID);
+        PackageTableData tableData = PackageDataManage.Instance.GetPackageTableData_ByID(data.itemID);
         switch(type)
         {
                 case EquipmentType.Weapon:
@@ -112,7 +125,7 @@ public class EquipmentPanel : BasePanel
                     uiShoeIcon.sprite = tableData.itemIcon;
                     break;
             }
-        RefreshAttr();
+        Refresh();
     }
 
     private void OnEquip(EquipmentType type, PackageLocalTableData data)
@@ -138,7 +151,7 @@ public class EquipmentPanel : BasePanel
                     uiShoeIcon.sprite = default;
                     break;
             }
-        RefreshAttr();
+        Refresh();
     }
 #endregion
 #region  UI按钮事件
@@ -151,6 +164,9 @@ public class EquipmentPanel : BasePanel
         uiRingButton.onClick.AddListener(OnClickRing);
         uiShoeButton.onClick.AddListener(OnClickShoe);
         uiNecklaceButton.onClick.AddListener(OnClickNecklace);
+        uiOpenEquipBag.onClick.AddListener(OnOpenEquipBag);
+        uiCloseEquipBag.onClick.AddListener(OnCloseEquipBag);
+        
     }
 
     private void OnClickNecklace()
@@ -202,6 +218,40 @@ public class EquipmentPanel : BasePanel
         Debug.Log($"查看头盔装备");
     }
 
+    private void OnOpenEquipBag()
+    {
+        animator.SetTrigger("Open");
+        isOpenEquipBag = true;
+
+        uiOpenEquipBag.gameObject.SetActive(!isOpenEquipBag); 
+        uiCloseEquipBag.gameObject.SetActive(isOpenEquipBag);  
+        StartCoroutine(OpenEquipBag(0.4f));
+    }
+
+    private void OnCloseEquipBag()
+    {
+        isOpenEquipBag = false;
+        equipBagPrefab.SetActive(false);
+        
+        uiOpenEquipBag.gameObject.SetActive(!isOpenEquipBag); 
+        uiCloseEquipBag.gameObject.SetActive(isOpenEquipBag);  
+        animator.SetTrigger("Close");
+    }
+/// <summary>
+/// 打开装备背包并关闭打开按钮且打开关闭按钮
+/// </summary>
+/// <param name="delay"></param>
+/// <returns></returns>
+    private IEnumerator OpenEquipBag(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if(isOpenEquipBag)
+        {
+            equipBagPrefab.SetActive(true);
+        }
+        
+    }
+
     /// <summary>
     /// 关闭面板
     /// </summary>
@@ -221,7 +271,7 @@ public class EquipmentPanel : BasePanel
         foreach(var item in equipItems)
         {
             PackageLocalTableData data = item.Value;
-            PackageTableData tableData = PackageDataManage.Instance.GetPackageItem_ByID(data.itemID);
+            PackageTableData tableData = PackageDataManage.Instance.GetPackageTableData_ByID(data.itemID);
             //更新对应的图标
             switch(item.Key)
             {
@@ -271,5 +321,13 @@ public class EquipmentPanel : BasePanel
         Vector2 mousePos = Mouse.current.position.ReadValue();
         itemDetails.SetPanelPos(panelCanvas.transform as RectTransform ,mousePos);
      
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            itemDetailsPanelPrefab.SetActive(false);
+        }
     }
 }

@@ -5,57 +5,152 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlayerAttributeManager))]
 public class Health : MonoBehaviour
 {   
-    /* [Header("血量")]
-    [SerializeField] float maxHealth;
-    [SerializeField] float currentHealth;
+    //TODO 与角色属性关联
+    [SerializeField] Data_HealthSO healthSO;
+    [SerializeField] PlayerAttributeManager attributeManager;
+    private int currentDefense ;
 
 
-    [Header("无敌时间")]
-    [SerializeField] float invulnerableDuration;
-    [SerializeField] bool isInvulnerable; */
-
-    [SerializeField] Data_HealthSO health;
-
-    //public UnityEvent<Transform> onTakeDamage; //受伤事件
-    public event Action OnHurt;
+    public Action<Transform> onTakeDamage; //受伤事件
+    public event Action<Transform,float> OnHurt;
+    public event Action OnOnlyHurt;
     public event Action OnDie;
+    private bool isDead = false;
+
 
 
     void Awake()
     {
-       // playerHealth = GetComponent<Data_Health> ();
-        health.currentHealth = health.maxHealth;
+        attributeManager = GetComponent<PlayerAttributeManager>();
+        
     }
 
-
-    public void TakeDamage(Data_AttackSO attack)
+    void Start()
     {
-        if (health.isInvulnerable)
+        currentDefense = attributeManager.GetAttribute(PlayerAttribute.Defense);
+        healthSO.isInvulnerable = false;
+    }
+
+    void OnEnable()
+    {
+        if(attributeManager != null)
         {
-            return;
+            attributeManager.OnAttributeChange += OnAttributeChange;
         }
+
         
-        health.currentHealth -= attack.currentAttackPower;
-        //health.currentHealth = math.max(0, playerHealth.currentHealth);
-        StartCoroutine(nameof(InvelnerableCoroutine));//启动无敌时间协程
-        // onTakeDamage?.Invoke(attack.transform);
-        OnHurt?.Invoke();
-        
-        if (health.currentHealth <= 0)
+    }
+
+    void OnDisable()
+    {
+        if(attributeManager != null)
         {
+            attributeManager.OnAttributeChange -= OnAttributeChange;
+        }
+    }
+
+    private void OnAttributeChange(PlayerAttribute attribute, int newValue)
+    {
+        if(attribute == PlayerAttribute.Defense)
+        {
+            currentDefense = attributeManager.GetAttribute(PlayerAttribute.Defense);
+        }
+        else if(attribute == PlayerAttribute.HP && newValue <= 0 && !isDead)
+        {
+            isDead = true;
+            Debug.Log($"死亡");
             OnDie?.Invoke();
         }
     }
 
+    public void TakeDamage(Enemy_AttackSO attack,Transform position)
+    {
+        if (healthSO.isInvulnerable)
+        {
+            return;
+        }
+        
+        Debug.Log($"触发受伤,敌人攻击力为{attack.currentAttackPower}");
+
+        int damage = (int)Mathf.Max(attack.currentAttackPower - currentDefense, 0);    
+        
+        //if( damage <= 0) return; 
+
+        TakePassiveDamage(damage);
+        
+        
+
+        StartCoroutine(nameof(InvelnerableCoroutine));//启动无敌时间协程
+        
+        OnHurt?.Invoke(position,attack.knockbackForce);
+        
+    }
+
+    /* public void TakeDamage(Enemy_AttackSO attack)
+    {
+        if (healthSO.isInvulnerable)
+        {
+            return;
+        }
+        
+        int damage = (int)Mathf.Max(attack.currentAttackPower - currentDefense, 0);    
+        //if( damage <= 0) return;
+
+        TakePassiveDamage(damage);
+        
+
+        StartCoroutine(nameof(InvelnerableCoroutine));//启动无敌时间协程
+        
+        OnOnlyHurt?.Invoke();
+        
+    } */
+
     protected virtual IEnumerator InvelnerableCoroutine()
     {
-        health.isInvulnerable = true;
+        healthSO.isInvulnerable = true;
         //等待无敌时间
-        yield return new WaitForSeconds(health.invulnerableDuration);
+        yield return new WaitForSeconds(healthSO.invulnerableDuration);
 
-        health.isInvulnerable = false;
+        healthSO.isInvulnerable = false;
+    }
+
+    /// <summary>
+    /// 恢复HP
+    /// </summary>
+    /// <param name="value"></param>
+    public void RestoreHealth(int value)
+    {
+        attributeManager.ModifyAttribute(PlayerAttribute.HP, value);
+    }
+    /// <summary>
+    /// 扣血
+    /// </summary>
+    /// <param name="damage"></param>
+    public void TakePassiveDamage(int damage)
+    {
+        if (isDead) return;
+        
+        attributeManager.ModifyAttribute(PlayerAttribute.HP, -damage);
+    }
+/// <summary>
+/// 获取当前生命值
+/// </summary>
+/// <returns></returns>
+    private int GetCurrentHp()
+    {
+        return attributeManager.GetAttribute(PlayerAttribute.HP);
+    }
+
+/// <summary>
+/// 获取最大生命值
+/// </summary>
+/// <returns></returns>
+    private int GetMaxHp()
+    {
+        return attributeManager.GetAttribute(PlayerAttribute.MaxHP);
     }
 
 }

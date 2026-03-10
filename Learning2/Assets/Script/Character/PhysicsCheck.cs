@@ -4,7 +4,9 @@ using JetBrains.Annotations;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
-
+/// <summary>
+/// 角色射线检测
+/// </summary>
 public class PhysicsCheck : MonoBehaviour
 {
     private Rigidbody2D rb;
