@@ -423,8 +423,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u6263\u8840"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
-  m_sharedMaterial: {fileID: -9094748820714758547, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
+  m_sharedMaterial: {fileID: 1225975775557254540, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -678,8 +678,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u83B7\u5F97\u7ECF\u9A8C\u503C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
-  m_sharedMaterial: {fileID: -9094748820714758547, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
+  m_sharedMaterial: {fileID: 1225975775557254540, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1135,18 +1135,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.84375}
+  m_Offset: {x: 0, y: -0.14517593}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.875, y: 1.6875}
-    newSize: {x: 1.875, y: 1.6875}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.875, y: 1.6875}
+  m_Size: {x: 1.875, y: 1.675513}
   m_EdgeRadius: 0
 --- !u!212 &673676830
 SpriteRenderer:
@@ -1189,15 +1189,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 88033111, guid: daca392dcd8f6cc4e893d1edd5cb4dfa, type: 3}
+  m_Sprite: {fileID: -665561428, guid: daca392dcd8f6cc4e893d1edd5cb4dfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.875, y: 1.6875}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &673676831
@@ -1209,7 +1209,7 @@ Transform:
   m_GameObject: {fileID: 673676828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.93, y: -3.97, z: 0}
+  m_LocalPosition: {x: 16.896, y: -3.819, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1227,8 +1227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b94ea09e6ff8e42bb7589067863697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openSprite: {fileID: 1383354568, guid: daca392dcd8f6cc4e893d1edd5cb4dfa, type: 3}
-  closeSprite: {fileID: 88033111, guid: daca392dcd8f6cc4e893d1edd5cb4dfa, type: 3}
+  openSprite: {fileID: -150800990, guid: daca392dcd8f6cc4e893d1edd5cb4dfa, type: 3}
+  closeSprite: {fileID: -665561428, guid: daca392dcd8f6cc4e893d1edd5cb4dfa, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,8 +1382,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u56DE\u84DD"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
-  m_sharedMaterial: {fileID: -9094748820714758547, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
+  m_sharedMaterial: {fileID: 1225975775557254540, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7468,7 +7468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1053123796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7732,8 +7732,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u6263\u84DD"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
-  m_sharedMaterial: {fileID: -9094748820714758547, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
+  m_sharedMaterial: {fileID: 1225975775557254540, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8288,8 +8288,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u56DE\u8840"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
-  m_sharedMaterial: {fileID: -9094748820714758547, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
+  m_sharedMaterial: {fileID: 1225975775557254540, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8375,17 +8375,17 @@ GameObject:
   - component: {fileID: 1667604934}
   - component: {fileID: 1667604946}
   - component: {fileID: 1667604947}
+  - component: {fileID: 1667604950}
   - component: {fileID: 1667604936}
   - component: {fileID: 1667604948}
   - component: {fileID: 1667604949}
-  - component: {fileID: 1667604950}
   m_Layer: 8
   m_Name: Minotaur
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1667604934
 SpriteRenderer:
   m_ObjectHideFlags: 0

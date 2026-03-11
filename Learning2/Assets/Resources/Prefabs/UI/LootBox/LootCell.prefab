@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5339979981554313979}
   - component: {fileID: 4605530812165065265}
   - component: {fileID: 3406353043656260372}
+  - component: {fileID: 700063376957345454}
   m_Layer: 5
   m_Name: LootCell
   m_TagString: Untagged
@@ -70,6 +71,27 @@ MonoBehaviour:
   UINumText: {fileID: 6723955876740994287}
   UIItemIcon: {fileID: 8809498298608052102}
   anim: {fileID: 9015917646556058162}
+--- !u!95 &700063376957345454
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55324517029017396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1168437243272462750
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,8 +234,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 99
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
-  m_sharedMaterial: {fileID: -9094748820714758547, guid: aad7feedbe9db7f4a98853f053a641cc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
+  m_sharedMaterial: {fileID: 1225975775557254540, guid: f23b450a2dd46f641a2c4f78a844eac2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -21,6 +21,7 @@ public class PlayerState_Jump : PlayerState
     public override void Update()
     {
         base.Update();
+        
         if (playerInput.IsStopJump || playerController.IsFall)
         {
             playerStateMachine.SwitchState(typeof(PlayerState_Fall));

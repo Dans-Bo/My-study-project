@@ -30,11 +30,11 @@ public class EnemyHealth : MonoBehaviour
         }
         
         health.currentHealth -= attack.currentAttackPower ;
-        Mathf.Clamp(health.currentHealth ,0 , health.maxHealth);
+        health.currentHealth = Mathf.Clamp(health.currentHealth, 0, health.maxHealth);
 
         StartCoroutine(nameof(InvelnerableCoroutine));//启动无敌时间协程
         OnHurt?.Invoke(attackerTransform ,attack.knockbackForce );
-        Debug.Log($"怪物受伤");
+        Debug.Log($"怪物受伤,当前生命值：{health.currentHealth}");
         
         if (health.currentHealth <= 0)
         {

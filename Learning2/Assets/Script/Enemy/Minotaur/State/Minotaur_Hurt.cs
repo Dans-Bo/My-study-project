@@ -54,7 +54,6 @@ public class Minotaur_Hurt :Minotaur_State
         base.Exit();
 
         ResetHurtState();
-        //退出受伤状态
         rb2D.velocity = Vector2.zero;
     }
 }
