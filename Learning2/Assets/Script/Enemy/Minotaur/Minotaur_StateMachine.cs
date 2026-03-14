@@ -1,51 +1,39 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
 public class Minotaur_StateMachine: StateMachine
 {
     [SerializeField] Minotaur_State[] states; //创建状态数组
-    [SerializeField] private Transform[] wayPoint;  //巡逻点位
-    public Vector2[] WayPointPositions { get ; private set;}
-    public System.Type CurrentStateType => currentState?.GetType();
+
 
     private Animator animator;
-    private Rigidbody2D rb;
-    private CheckPlayer checkPlayer;
-    private CheckAttackRange checkAttackRange;
-    private EnemyHealth health;
+    private Minotaur_Agent minotaurAgent;
 
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-        checkPlayer = GetComponentInChildren<CheckPlayer>();
-        checkAttackRange = GetComponentInChildren<CheckAttackRange>();
-        health = GetComponent<EnemyHealth>();
-        stateTable  = new Dictionary<System.Type, IState>(states.Length);
-        
+        minotaurAgent = GetComponent<Minotaur_Agent>();
 
-        //巡逻点位初始化
-        
-
-        if(wayPoint == null)
+        if(animator == null )
         {
-            Debug.LogError("巡逻点位不存在");
-        }
-        
-        WayPointPositions = new Vector2[wayPoint.Length];
-
-        for (int i = 0; i < wayPoint.Length; i++)
-        {
-            WayPointPositions[i] = wayPoint[i].position;
+            Debug.Log("animator组件丢失");
         }
 
+        if(minotaurAgent == null)
+        {
+            Debug.Log("minotaurAgent组件丢失");
+        }
+        
         foreach (Minotaur_State state in states) //遍历状态数组里的所有状态，并初始化所需要的参数
         {
-            state.Initialize(animator, this, rb, transform,checkAttackRange,checkPlayer,health);
-            stateTable.Add(state.GetType(), state); 
+            state.Initialize(animator,minotaurAgent,this);
+            stateTable.Add(state.GetType(), state);
         }
     }
 
@@ -53,47 +41,6 @@ public class Minotaur_StateMachine: StateMachine
     {
         SwitchOn(stateTable[typeof(Minotaur_Idle)]); //初始化为站立状态
         Debug.Log("初始化为站立状态");
-    }
-
-    /// <summary>
-    /// 编辑器停止运行时，清理所有状态的事件
-    /// </summary>
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetStateMachines()
-    {
-        var allStateMachines = FindObjectsOfType<Minotaur_StateMachine>();
-        foreach (var sm in allStateMachines)
-        {
-            sm.CleanupAllStates();
-        }
-    }
-
-    /// <summary>
-    /// 清理所有状态的事件订阅
-    /// </summary>
-    private void CleanupAllStates()
-    {
-        if (stateTable == null) return;
-        
-        foreach (var state in stateTable.Values)
-        {
-            if (state is Minotaur_State minotaurState)
-            {
-                minotaurState.DisableEvents();
-            }
-        }
-        
-        // 退出当前状态并解绑
-        currentState?.Exit();
-        currentState = null;
-    }
-
-    /// <summary>
-    /// 确保对象销毁时清理事件
-    /// </summary>
-    protected  void OnDestroy()
-    {
-        CleanupAllStates();
     }
 
     public void SwitchMinotaurState(EnemyState state)
@@ -129,8 +76,5 @@ public class Minotaur_StateMachine: StateMachine
                 //Debug.Log("切换到攻击冷却状态");
                 break;
         }
-    }
-
-    
+    }  
 }
-

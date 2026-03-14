@@ -11,7 +11,7 @@ public class Minotaur_Attack : Minotaur_State
     {
         base.Enter();
 
-        rb2D.velocity = Vector2.zero; //速度为0
+        minotaur_Agent.StopMove();
 
         animator.SetTrigger("attack"); //动画运行
 
@@ -25,8 +25,8 @@ public class Minotaur_Attack : Minotaur_State
         
         if(IsAnimationFinished) //攻击动画完成切换硬值状态，避免一直攻击
         {
-            MarkCompleted();
             stateMachine.SwitchMinotaurState(EnemyState.AttackCooldown);
+            return;
         } 
     } 
         

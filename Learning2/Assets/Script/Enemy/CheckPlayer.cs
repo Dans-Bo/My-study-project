@@ -34,7 +34,8 @@ public class CheckPlayer : MonoBehaviour
     //private bool firstSeePlayer = false;
     Collider2D [] collider2Ds = new Collider2D [1];
 
-    
+    public  Action<bool> IsSeePlayer;//是否发现角色
+    public  Action<Vector2>  SetPlayerPosition; //记录玩家位置
 
     private float lastSeePlayerTime ; //上一次发现玩家的时间
     //Transform playerTransform;
@@ -48,8 +49,7 @@ public class CheckPlayer : MonoBehaviour
         SetPlayerPosition?.Invoke(Vector2.negativeInfinity);
     }
     //事件
-    public event Action<bool> IsSeePlayer;//是否发现角色
-    public event Action<Vector2>  SetPlayerPosition; //记录玩家位置
+    
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,6 +58,7 @@ public class CheckPlayer : MonoBehaviour
         {
             //firstSeePlayer = false;
            isPlayerInSight = true ;
+           Debug.Log("发现玩家");
 
            if(checkRoutine == null)
             {
@@ -89,6 +90,7 @@ public class CheckPlayer : MonoBehaviour
                 {
                     canSeePlayer = true;
                     IsSeePlayer?.Invoke(true);
+                    
                 }
 
                 lastSeePlayerTime = Time.time;
@@ -96,8 +98,8 @@ public class CheckPlayer : MonoBehaviour
                 Collider2D playerCollider = collider2Ds[0];
                 Vector2 playerPosition = playerCollider.transform.position;
                 IsSeePlayer?.Invoke(true);
+                Debug.Log("发现玩家");
                 
-
                 if(playerPosition.y > transform.position.y) //如果玩家在怪物上方，投影至和怪物一样的Y轴，防止怪物蹦
                 {
                     playerPosition.y = transform.position.y;

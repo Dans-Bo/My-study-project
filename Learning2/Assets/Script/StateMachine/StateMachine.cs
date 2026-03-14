@@ -12,14 +12,22 @@ public class StateMachine : MonoBehaviour
 
     protected Dictionary<System.Type, IState> stateTable;
 
+    public float StateStartTime { get; private set; }
+    public float StateDuration => Time.time - StateStartTime;
+
+    protected virtual void Awake()
+    {
+        stateTable = new Dictionary<System.Type, IState>();
+    }
+
     protected virtual void Update()
     {
-        currentState.Update();
+        currentState?.Update();
     }
 
     protected virtual void  FixedUpdate()
     {
-        currentState.FixedUpdate();
+        currentState?.FixedUpdate();
     }
     /// <summary>
     /// 状态启动
@@ -28,6 +36,7 @@ public class StateMachine : MonoBehaviour
     protected void SwitchOn(IState newState)
     {
         currentState = newState;
+        StateStartTime = Time.time; //记录状态开始时间
         currentState.Enter();
     }
     /// <summary>

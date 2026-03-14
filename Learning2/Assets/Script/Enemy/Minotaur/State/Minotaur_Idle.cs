@@ -7,19 +7,17 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/StateMachine/Enemy/MinotaurState/Idle", fileName = "Idle")]
 public class Minotaur_Idle :Minotaur_State
 {
-    private float idleTime;  //站立时间
-    private float startTime;
-    private bool isTimeCount = false;
+   
     public override void Enter()
     {
         base.Enter();
-        startTime = Time.time;
-        
+
+        minotaur_Agent.SetIdleTime();
+        minotaur_Agent.StopMove();
+
+        //TODO 后续迁移至animator manager   
         animator.SetTrigger("idle");
         
-        idleTime = Random.Range(0.5f,4f);
-
-        isTimeCount = true;
     }
 
     public override void Update()
@@ -32,34 +30,35 @@ public class Minotaur_Idle :Minotaur_State
 
     private void SwitchState()
     {
+        
+         if(minotaur_Agent.IsDied)
+        {
+            stateMachine.SwitchMinotaurState(EnemyState.Died);
+            return;
+        } 
+        if(minotaur_Agent.IsHurt)
+        {
+            stateMachine.SwitchMinotaurState(EnemyState.Hurt);
+            return;
+        }
 
-
-        if(isChase)
+        if(minotaur_Agent.IsChase)
         {
             stateMachine.SwitchMinotaurState(EnemyState.Chase);
+            return;
         }
 
-        if(isTimeCount)
-        {
-            float time = Time.time - startTime;
-
-            if(time  > idleTime)
-            {
-                isTimeCount = false;
-                stateMachine.SwitchMinotaurState(EnemyState.Partol);
-            }
-        } 
-
-        if(isAttack)
+        if(minotaur_Agent.IsAttack)
         {
             stateMachine.SwitchMinotaurState(EnemyState.Attack);
-        }
+            return;
+        } 
 
+        if(minotaur_Agent.IsIdleTimerExpired())
+        {
+            stateMachine.SwitchMinotaurState(EnemyState.Partol);
+            return;
+        }  
     }
 
-
-    public override void Exit()
-    {
-        isTimeCount = false;
-    }
 }

@@ -7,14 +7,12 @@ using UnityEngine;
 public class Minotaur_AttackCooldown : Minotaur_State
 {
     [SerializeField] float attackCooldown = 1f;
-    private float startTime;
-    private bool isTimeCount = false;
 
     public override void Enter()
     {
         base.Enter();
-        startTime = Time.time;
-        isTimeCount = true;
+
+        minotaur_Agent.SetAttackCoolDownTime();
 
         animator.SetTrigger("idle");
     }
@@ -23,27 +21,32 @@ public class Minotaur_AttackCooldown : Minotaur_State
     {
         base.Update();
         
-        if(isTimeCount)
+        if(minotaur_Agent.IsAttackCoolDownExpired(attackCooldown))
         {
-            bool timeOver = Time.time - startTime > attackCooldown;
-            if(timeOver)
-            {
-                isTimeCount = false;
-                SwitchState();
-            }
+           
+            SwitchState();
+            
         }
     }
 
     private void SwitchState()
     {
-        if(isAttack)
+        if(minotaur_Agent.IsHurt)
+        {
+            stateMachine.SwitchMinotaurState(EnemyState.Hurt);
+            return;
+        }
+        
+        if(minotaur_Agent.IsAttack)
         {
             stateMachine.SwitchMinotaurState(EnemyState.Attack);
+            return;
         }
         else
         {
             stateMachine.SwitchMinotaurState(EnemyState.Idle);
-        }
+            return;
+        } 
     }
 
 
